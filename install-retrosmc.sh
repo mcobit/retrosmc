@@ -23,20 +23,45 @@ for choice in $choices
 do
     case $choice in
         1)
-            wget --no-check-certificate -O install.tar.bz2 $CURRENT_ARCHIVE 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading installation file" --gauge "\nPlease wait...\n"  7 60
-            (pv -n install.tar.bz2 | sudo tar xjf - -C / ) 2>&1 | dialog --title "Extracting installation file" --gauge "\nPlease wait...\n" 6 70
-            sudo chown -R osmc:osmc /opt/retropie | dialog --title "Fixing permissions for retropie" --gauge "\nPlease wait...\n" 6 70
-            sudo chown -R osmc:osmc /home/osmc/RetroPie | dialog --title "Fixing permissions for retropie" --gauge "\nPlease wait...\n" 6 70
-            sudo chown -R osmc:osmc /etc/emulationstation | dialog --title "Fixing permissions for emulationstation" --gauge "\nPlease wait...\n" 8 70
-            sudo chown -R osmc:osmc /home/osmc/.emulationstation | dialog --title "Fixing permissions for emulationstation" --gauge "\nPlease wait...\n" 8 70
+            wget --no-check-certificate -O install.tar.bz2 $CURRENT_ARCHIVE 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading installation file" --gauge "\nPlease wait...\n"  11 70
+            (pv -n install.tar.bz2 | sudo tar xjf - -C / ) 2>&1 | dialog --title "Extracting installation file" --gauge "\nPlease wait...\n" 11 70
+            sudo chown -R osmc:osmc /opt/retropie | dialog --title "Fixing permissions for retropie" --infobox "\nPlease wait...\n" 11 70
+            sudo chown -R osmc:osmc /home/osmc/RetroPie | dialog --title "Fixing permissions for retropie" --infobox "\nPlease wait...\n" 11 70
+            sudo chown -R osmc:osmc /etc/emulationstation | dialog --title "Fixing permissions for emulationstation" --infobox "\nPlease wait...\n" 11 70
+            sudo chown -R osmc:osmc /home/osmc/.emulationstation | dialog --title "Fixing permissions for emulationstation" --infobox "\nPlease wait...\n" 11 70
+            rm install.tar.bz2 | dialog --title "Deleting temporary installation file" --infobox "\nPlease wait...\n" 11 70
+            dialog --title "FINISHED!" --msgbox "\nEnjoy your retrosmc installation!\nPress OK to return to the menu.\n" 11 70
             ./install-retrosmc.sh
             ;;
         2)
             echo "Uninstalling retrosmc ..."
+            dialog --title "FINISHED!" --msgbox "\nEnjoy your retrosmc installation!\nPress OK to return to the menu.\n" 11 70
             ./install-retrosmc.sh
             ;;
         3)
             echo "Creating menu shortcut ..."
+    if [ ! "$(grep retropie.sh /home/osmc/.kodi/userdata/addon_data/script.skinshortcuts/mainmenu.DATA.xml)" ]; then
+cp /usr/share/kodi/addons/skin.osmc/shortcuts/mainmenu.DATA.xml /home/osmc/.kodi/userdata/addon_data/script.skinshortcuts/mainmenu.DATA.xml
+sudo chown osmc:osmc /home/osmc/.kodi/userdata/addon_data/script.skinshortcuts/mainmenu.DATA.xml
+
+CONTENT='        <shortcut>\
+                <defaultID />\
+                <label>RetroPie</label>\
+                <label2>Custom Shortcut</label2>\
+                <icon>DefaultShortcut.png</icon>\
+                <thumb />\
+                <action>System.Exec(/home/osmc/retropie.sh)</action>\
+      </shortcut>'
+
+sed -i.bak '/<\/shortcuts>/i\'"$CONTENT" /home/osmc/.kodi/userdata/addon_data/script.skinshortcuts/mainmenu.DATA.xml
+
+dialog --backtitle "RetroPie-OSMC setup script" --title "Creating shortcut" --msgbox "\nShortcut created.\n" 11 70
+
+else
+
+dialog --backtitle "RetroPie-OSMC setup script" --title "Creating shortcut" --msgbox "\nShortcut already exists.\n" 11 70
+
+fi
             ./install-retrosmc.sh
             ;;
         4)
