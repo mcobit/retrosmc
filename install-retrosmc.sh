@@ -7,7 +7,7 @@
 # Using this is on your own risk.
 
 CURRENT_ARCHIVE="https://raw.githubusercontent.com/mcobit/retrosmc/master/retrosmc-alpha-0.001.tar.bz2"
-
+CURRENT_SIZE="96109204"
 # Greet the user and ask what he wants to do
 
 cmd=(dialog --backtitle "retrosmc installation" --menu "Welcome to the retrosmc installation.\nWhat would you like to do?\n " 13 50 16)
@@ -26,7 +26,7 @@ do
             sudo apt-get update 2>&1 | dialog --title "Updating package database..." --infobox "\nPlease wait...\n" 11 70
             sudo apt-get --show-progress -y install dialog pv bzip2 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Installing dialog and pv programs if they are not present" --gauge "\nPlease wait...\n" 11 70
             wget --no-check-certificate -w 4 -O install.tar.bz2 $CURRENT_ARCHIVE 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading installation file" --gauge "\nPlease wait...\n"  11 70
-            while [ $(stat -c%s install.tar.bz2) != 95827784 ]; do
+            while [ $(stat -c%s install.tar.bz2) != $CURRENT_SIZE ]; do
             wget --no-check-certificate -w 4 -O install.tar.bz2 $CURRENT_ARCHIVE 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading installation file" --gauge "\nPlease wait...\n"  11 70
             done
             (pv -n install.tar.bz2 | sudo tar xjf - -C / ) 2>&1 | dialog --title "Extracting installation file" --gauge "\nPlease wait...\n" 11 70
@@ -47,6 +47,7 @@ do
                  sudo rm -r /home/osmc/RetroPie | dialog --title "Removing /home/osmc/RetroPie" --infobox "\nPlease wait...\n" 11 70
                  sudo rm -r /etc/emulationstation | dialog --title "Removing /etc/emulationstation" --infobox "\nPlease wait...\n" 11 70
                  sudo rm -r /home/osmc/.emulationstation | dialog --title "Removing /home/osmc/.emulationstation" --infobox "\nPlease wait...\n" 11 70
+                 sudo rm /usr/bin/emulationstation | dialog --title "Removing /usr/bin/emulationstation" --infobox "\nPlease wait...\n" 11 70
                  dialog --title "FINISHED!" --msgbox "\nSuccessfully uninstalled retrosmc!\nPress OK to return to the menu.\n" 11 70
                  ;;
 	         1)
