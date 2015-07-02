@@ -60,10 +60,11 @@ do
                  ./install-retrosmc.sh
                  ;;
         3)
+           if [ ! -f /home/osmc/.kodi/userdata/addon_data/script.skinshortcuts/mainmenu.DATA.xml ]; then
+                 cp /usr/share/kodi/addons/skin.osmc/shortcuts/mainmenu.DATA.xml /home/osmc/.kodi/userdata/addon_data/script.skinshortcuts/mainmenu.DATA.xml
+                 sudo chown osmc:osmc /home/osmc/.kodi/userdata/addon_data/script.skinshortcuts/mainmenu.DATA.xml
+           fi
            if [ ! "$(grep retropie.sh /home/osmc/.kodi/userdata/addon_data/script.skinshortcuts/mainmenu.DATA.xml 2>&1)" ]; then
-           cp /usr/share/kodi/addons/skin.osmc/shortcuts/mainmenu.DATA.xml /home/osmc/.kodi/userdata/addon_data/script.skinshortcuts/mainmenu.DATA.xml
-           sudo chown osmc:osmc /home/osmc/.kodi/userdata/addon_data/script.skinshortcuts/mainmenu.DATA.xml
-
 CONTENT='        <shortcut>\
                 <defaultID />\
                 <label>RetroPie</label>\
@@ -73,15 +74,15 @@ CONTENT='        <shortcut>\
                 <action>System.Exec(/home/osmc/RetroPie/scripts/retropie.sh)</action>\
       </shortcut>'
 
-sed -i.bak '/<\/shortcuts>/i\'"$CONTENT" /home/osmc/.kodi/userdata/addon_data/script.skinshortcuts/mainmenu.DATA.xml 
+                 sed -i.bak '/<\/shortcuts>/i\'"$CONTENT" /home/osmc/.kodi/userdata/addon_data/script.skinshortcuts/mainmenu.DATA.xml
 
-dialog --backtitle "RetroPie-OSMC setup script" --title "Creating shortcut" --msgbox "\nShortcut created.\n" 11 70
+                 dialog --backtitle "RetroPie-OSMC setup script" --title "Creating shortcut" --msgbox "\nShortcut created.\n" 11 70
 
-else
+           else
 
-dialog --backtitle "RetroPie-OSMC setup script" --title "Creating shortcut" --msgbox "\nShortcut already exists.\n" 11 70
+                 dialog --backtitle "RetroPie-OSMC setup script" --title "Creating shortcut" --msgbox "\nShortcut already exists.\n" 11 70
 
-fi
+           fi
             ./install-retrosmc.sh
             ;;
 #        4)
