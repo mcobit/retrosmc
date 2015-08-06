@@ -14,7 +14,7 @@ cmd=(dialog --backtitle "retrosmc installation" --menu "Welcome to the retrosmc 
 
 options=(1 "Install retrosmc"
          2 "Uninstall retrosmc"
-         3 "Install Launcher Addon")
+         3 "Install Launcher Addon"
          4 "Remove Launcher Addon")
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
