@@ -1,21 +1,21 @@
 #!/bin/bash
 
-# Version 0.001
+# Version 0.002
 
 # This is a script by mcobit to install retrosmc to OSMC.
 # I am not responsible for any harm done to your system.
 # Using this is on your own risk.
 
-CURRENT_ARCHIVE="https://raw.githubusercontent.com/mcobit/retrosmc/master/retrosmc-alpha-0.001.tar.bz2"
-CURRENT_SIZE="96109204"
+CURRENT_ARCHIVE="https://github.com/mcobit/retrosmc/releases/download/Alpha0.002/retrosmc-alpha-0.002.tar.xz"
+CURRENT_SIZE="101163748"
 # Greet the user and ask what he wants to do
 
 cmd=(dialog --backtitle "retrosmc installation" --menu "Welcome to the retrosmc installation.\nWhat would you like to do?\n " 13 50 16)
 
 options=(1 "Install retrosmc"
          2 "Uninstall retrosmc"
-         3 "Create menu shortcut")
-#         4 "Remove menu shortcut")
+         3 "Install Launcher Addon")
+         4 "Remove Launcher Addon")
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
@@ -24,12 +24,12 @@ do
     case $choice in
         1)
             sudo apt-get update 2>&1 | dialog --title "Updating package database..." --infobox "\nPlease wait...\n" 11 70
-            sudo apt-get --show-progress -y install dialog pv bzip2 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Installing dialog and pv programs if they are not present" --gauge "\nPlease wait...\n" 11 70
+            sudo apt-get --show-progress -y install dialog pv xz-utils 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Installing dialog and pv programs if they are not present" --gauge "\nPlease wait...\n" 11 70
             wget --no-check-certificate -w 4 -O install.tar.bz2 $CURRENT_ARCHIVE 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading installation file" --gauge "\nPlease wait...\n"  11 70
-            while [ $(stat -c%s install.tar.bz2) != $CURRENT_SIZE ]; do
-            wget --no-check-certificate -w 4 -O install.tar.bz2 $CURRENT_ARCHIVE 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading installation file" --gauge "\nPlease wait...\n"  11 70
+            while [ $(stat -c%s install.tar.xz) != $CURRENT_SIZE ]; do
+            wget --no-check-certificate -w 4 -O install.tar.xz $CURRENT_ARCHIVE 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading installation file" --gauge "\nPlease wait...\n"  11 70
             done
-            (pv -n install.tar.bz2 | sudo tar xjf - -C / ) 2>&1 | dialog --title "Extracting installation file" --gauge "\nPlease wait...\n" 11 70
+            (pv -n install.tar.xz | sudo tar xJf - -C / ) 2>&1 | dialog --title "Extracting installation file" --gauge "\nPlease wait...\n" 11 70
             sudo chown -R osmc:osmc /opt/retropie | dialog --title "Fixing permissions for retropie" --infobox "\nPlease wait...\n" 11 70
             sudo chown -R osmc:osmc /home/osmc/RetroPie | dialog --title "Fixing permissions for retropie" --infobox "\nPlease wait...\n" 11 70
             sudo chown -R osmc:osmc /etc/emulationstation | dialog --title "Fixing permissions for emulationstation" --infobox "\nPlease wait...\n" 11 70
@@ -60,32 +60,16 @@ do
                  ./install-retrosmc.sh
                  ;;
         3)
-           if [ ! "$(grep retropie.sh /home/osmc/.kodi/userdata/addon_data/script.skinshortcuts/mainmenu.DATA.xml 2>&1)" ]; then
-           cp /usr/share/kodi/addons/skin.osmc/shortcuts/mainmenu.DATA.xml /home/osmc/.kodi/userdata/addon_data/script.skinshortcuts/mainmenu.DATA.xml
-           sudo chown osmc:osmc /home/osmc/.kodi/userdata/addon_data/script.skinshortcuts/mainmenu.DATA.xml
-
-CONTENT='        <shortcut>\
-                <defaultID />\
-                <label>RetroPie</label>\
-                <label2>Custom Shortcut</label2>\
-                <icon>DefaultShortcut.png</icon>\
-                <thumb />\
-                <action>System.Exec(/home/osmc/RetroPie/scripts/retropie.sh)</action>\
-      </shortcut>'
-
-sed -i.bak '/<\/shortcuts>/i\'"$CONTENT" /home/osmc/.kodi/userdata/addon_data/script.skinshortcuts/mainmenu.DATA.xml 
-
-dialog --backtitle "RetroPie-OSMC setup script" --title "Creating shortcut" --msgbox "\nShortcut created.\n" 11 70
-
-else
-
-dialog --backtitle "RetroPie-OSMC setup script" --title "Creating shortcut" --msgbox "\nShortcut already exists.\n" 11 70
-
-fi
+	  wget https://github.com/jcnventura/retrosmc/blob/feature/launcher-plugin/plugin.program.retropie-launcher-0.0.1.tgz
+	  wget --no-check-certificate -w 4 -O plugin.program.retropie-launcher-0.0.1.tgz https://github.com/jcnventura/retrosmc/blob/feature/launcher-plugin/plugin.program.retropie-launcher-0.0.1.tgz 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading Addon" --gauge "\nPlease wait...\n"  11 70
+	  (pv -n plugin.program.retropie-launcher-0.0.1.tgz | sudo tar xzf - -C /home/osmc/ ) 2>&1 | dialog --title "Extracting Addon" --gauge "\nPlease wait...\n" 11 70
+	  dialog --backtitle "RetroPie-OSMC setup script" --title "Installing Addon" --msgbox "\nAddon installed.\n" 11 70
             ./install-retrosmc.sh
             ;;
-#        4)
-#            ./install-retrosmc.sh
-#            ;;
+        4)
+	   rm -r /home/osmc/.kodi/addons/plugin.program.retropie-launcher
+	   dialog --backtitle "RetroPie-OSMC setup script" --title "Removing Addon" --msgbox "\nAddon removed.\n" 11 70
+            ./install-retrosmc.sh
+            ;;
     esac
 done
