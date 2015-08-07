@@ -29,6 +29,7 @@ do
             while [ $(stat -c%s install.tar.bz2) != $CURRENT_SIZE ]; do
             wget --no-check-certificate -w 4 -O install.tar.bz2 $CURRENT_ARCHIVE 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading installation file" --gauge "\nPlease wait...\n"  11 70
             done
+	    mkdir /home/osmc/RetroPie/backup
 	    cp -r /opt/retropie/configs /home/osmc/RetroPie/backup/ | dialog --title "Backing up old configuration" --infobox "\nPlease wait...\n" 11 70
             (pv -n install.tar.bz2 | sudo tar xjf - -C / ) 2>&1 | dialog --title "Extracting installation file" --gauge "\nPlease wait...\n" 11 70
             sudo chown -R osmc:osmc /opt/retropie | dialog --title "Fixing permissions for retropie" --infobox "\nPlease wait...\n" 11 70
