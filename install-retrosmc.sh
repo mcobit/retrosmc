@@ -4,9 +4,9 @@
 # I am not responsible for any harm done to your system.
 # Using this is on your own risk.
 
-CURRENT_VERSION="Alpha 0.004"
+CURRENT_VERSION="Alpha 0.005"
 CURRENT_ARCHIVE="https://github.com/mcobit/retrosmc/releases/download/Alpha0.003/retrosmc-alpha-0.003.tar.bz2"
-CURRENT_SIZE="99070920"
+CURRENT_SIZE="99070807"
 
 wget --no-check-certificate -O versioncheck https://raw.githubusercontent.com/mcobit/retrosmc/master/install-retrosmc.sh 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Checking for update" --gauge "\nPlease wait...\n"  11 70
 
@@ -39,12 +39,12 @@ do
             wget --no-check-certificate -w 4 -O install.tar.bz2 $CURRENT_ARCHIVE 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading installation file" --gauge "\nPlease wait...\n"  11 70
             done
 	    mkdir /home/osmc/RetroPie/backup
-	    cp -r /opt/retropie/configs /home/osmc/RetroPie/backup/ | dialog --title "Backing up old configuration" --infobox "\nPlease wait...\n" 11 70
+#	    cp -r /opt/retropie/configs /home/osmc/RetroPie/backup/ | dialog --title "Backing up old configuration" --infobox "\nPlease wait...\n" 11 70
             (pv -n install.tar.bz2 | sudo tar xjf - -C / ) 2>&1 | dialog --title "Extracting installation file" --gauge "\nPlease wait...\n" 11 70
             sudo chown -R osmc:osmc /opt/retropie | dialog --title "Fixing permissions for retropie" --infobox "\nPlease wait...\n" 11 70
             sudo chown -R osmc:osmc /home/osmc/RetroPie | dialog --title "Fixing permissions for retropie" --infobox "\nPlease wait...\n" 11 70
             sudo chown -R osmc:osmc /etc/emulationstation | dialog --title "Fixing permissions for emulationstation" --infobox "\nPlease wait...\n" 11 70
-	    cp -r /home/osmc/RetroPie/backup/configs /opt/retropie/ | dialog --title "Restoring old configuration" --infobox "\nPlease wait...\n" 11 70
+#	    cp -r /home/osmc/RetroPie/backup/configs /opt/retropie/ | dialog --title "Restoring old configuration" --infobox "\nPlease wait...\n" 11 70
             rm install.tar.bz2 | dialog --title "Deleting temporary installation file" --infobox "\nPlease wait...\n" 11 70
 
 if [ ! "$(grep Action /home/osmc/.emulationstation/es_input.cfg)" ]; then
