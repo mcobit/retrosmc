@@ -17,6 +17,7 @@ if [ "$(grep CURRENT_VERSION ./versioncheck)" != "$(grep CURRENT_VERSION ./insta
  ./install-retrosmc.sh
  exit 0
 fi
+rm ./versioncheck
 
 cmd=(dialog --backtitle "retrosmc installation - Version $CURRENT_VERSION" --menu "Welcome to the retrosmc installation.\nWhat would you like to do?\n " 13 50 16)
 
