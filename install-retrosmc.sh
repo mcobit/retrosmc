@@ -4,7 +4,7 @@
 # I am not responsible for any harm done to your system.
 # Using this is on your own risk.
 
-CURRENT_VERSION="Alpha 0.003"
+CURRENT_VERSION="Alpha 0.004"
 CURRENT_ARCHIVE="https://github.com/mcobit/retrosmc/releases/download/Alpha0.003/retrosmc-alpha-0.003.tar.bz2"
 CURRENT_SIZE="99070920"
 
@@ -46,6 +46,18 @@ do
             sudo chown -R osmc:osmc /etc/emulationstation | dialog --title "Fixing permissions for emulationstation" --infobox "\nPlease wait...\n" 11 70
 	    cp -r /home/osmc/RetroPie/backup/configs /opt/retropie/ | dialog --title "Restoring old configuration" --infobox "\nPlease wait...\n" 11 70
             rm install.tar.bz2 | dialog --title "Deleting temporary installation file" --infobox "\nPlease wait...\n" 11 70
+
+if [ ! "$(grep Action /home/osmc/.emulationstation/es_input.cfg)" ]; then
+                mkdir "/home/osmc/.emulationstation"
+    cat > "/home/osmc/.emulationstation/es_input.cfg" << _EOF_
+<?xml version="1.0"?>
+<inputList>
+  <inputAction type="onfinish">
+    <command>/opt/retropie/supplementary/emulationstation/scripts/inputconfiguration.sh</command>
+  </inputAction>
+</inputList>
+_EOF_
+fi
             dialog --title "FINISHED!" --msgbox "\nEnjoy your retrosmc installation!\nPress OK to return to the menu.\n" 11 70
             ./install-retrosmc.sh
             ;;
