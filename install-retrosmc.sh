@@ -1,16 +1,24 @@
 #!/bin/bash
 
-# Version 0.003
-
 # This is a script by mcobit to install retrosmc to OSMC.
 # I am not responsible for any harm done to your system.
 # Using this is on your own risk.
 
+CURRENT_VERSION="Alpha 0.003"
 CURRENT_ARCHIVE="https://github.com/mcobit/retrosmc/releases/download/Alpha0.003/retrosmc-alpha-0.003.tar.bz2"
 CURRENT_SIZE="99070920"
-# Greet the user and ask what he wants to do
 
-cmd=(dialog --backtitle "retrosmc installation" --menu "Welcome to the retrosmc installation.\nWhat would you like to do?\n " 13 50 16)
+wget --no-check-certificate -O versioncheck https://raw.githubusercontent.com/mcobit/retrosmc/master/install-retrosmc.sh 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Checking for update" --gauge "\nPlease wait...\n"  11 70
+
+if [ "$(grep CURRENT_VERSION ./versioncheck)" != "$(grep CURRENT_VERSION ./install-retrosmc.sh)" ]; then
+ cp ./versioncheck ./install-retrosmc.sh
+ rm ./versioncheck
+ dialog --title "Script updated" --msgbox "\nSuccessfully updated install-retrosmc script.\nPress OK to restart it!\n" 11 70
+ ./install-retrosmc.sh
+ exit 0
+fi
+
+cmd=(dialog --backtitle "retrosmc installation - Version $CURRENT_VERSION" --menu "Welcome to the retrosmc installation.\nWhat would you like to do?\n " 13 50 16)
 
 options=(1 "Install retrosmc"
          2 "Uninstall retrosmc"
