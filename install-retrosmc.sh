@@ -26,14 +26,16 @@ do
             sudo apt-get update 2>&1 | dialog --title "Updating package database..." --infobox "\nPlease wait...\n" 11 70
             sudo apt-get --show-progress -y install dialog pv bzip2 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Installing dialog and pv programs if they are not present" --gauge "\nPlease wait...\n" 11 70
             wget --no-check-certificate -w 4 -O install.tar.bz2 $CURRENT_ARCHIVE 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading installation file" --gauge "\nPlease wait...\n"  11 70
-            while [ $(stat -c%s install.tar.xz) != $CURRENT_SIZE ]; do
+            while [ $(stat -c%s install.tar.bz2) != $CURRENT_SIZE ]; do
             wget --no-check-certificate -w 4 -O install.tar.bz2 $CURRENT_ARCHIVE 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading installation file" --gauge "\nPlease wait...\n"  11 70
             done
+	    cp -r /opt/retropie/configs /home/osmc/RetroPie/backup/ | dialog --title "Backing up old configuration" --infobox "\nPlease wait...\n" 11 70
             (pv -n install.tar.bz2 | sudo tar xjf - -C / ) 2>&1 | dialog --title "Extracting installation file" --gauge "\nPlease wait...\n" 11 70
             sudo chown -R osmc:osmc /opt/retropie | dialog --title "Fixing permissions for retropie" --infobox "\nPlease wait...\n" 11 70
             sudo chown -R osmc:osmc /home/osmc/RetroPie | dialog --title "Fixing permissions for retropie" --infobox "\nPlease wait...\n" 11 70
             sudo chown -R osmc:osmc /etc/emulationstation | dialog --title "Fixing permissions for emulationstation" --infobox "\nPlease wait...\n" 11 70
             sudo chown -R osmc:osmc /home/osmc/.emulationstation | dialog --title "Fixing permissions for emulationstation" --infobox "\nPlease wait...\n" 11 70
+	    cp -r /home/osmc/RetroPie/backup/configs /opt/retropie/ | dialog --title "Restoring old configuration" --infobox "\nPlease wait...\n" 11 70
             rm install.tar.bz2 | dialog --title "Deleting temporary installation file" --infobox "\nPlease wait...\n" 11 70
             dialog --title "FINISHED!" --msgbox "\nEnjoy your retrosmc installation!\nPress OK to return to the menu.\n" 11 70
             ./install-retrosmc.sh
