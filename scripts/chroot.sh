@@ -6,7 +6,11 @@ source /home/osmc/RetroPie/scripts/retrosmc-config.cfg
 
 # Inserting the sound module for alsa output
 
-sudo /sbin/modprobe snd-bcm2835sudo /sbin/modprobe snd-bcm2835
+sudo /sbin/modprobe snd-bcm2835
+
+# copy current resolv.conf to chroot
+
+sudo cp /etc/resolv.conf "$INSTALLDIR/retrosmc/etc/resolv.conf"
 
 # mount the needed host directories to chroot
 

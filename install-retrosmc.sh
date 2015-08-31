@@ -48,16 +48,21 @@ do
             done
             (pv -n install.tar.bz2 | sudo tar xjf - -C $INSTALLDIR/ ) 2>&1 | dialog --title "Extracting installation file" --gauge "\nPlease wait...\n" 11 70
             rm install.tar.bz2 | dialog --title "Deleting temporary installation file" --infobox "\nPlease wait...\n" 11 70
-            sudo chmod u+s "$INSTALLDIR/retrosmc/etc/sudoers"
-            sudo chmod u+s "$INSTALLDIR/retrosmc/etc/sudoers.d"
-            sudo chmod u+s "$INSTALLDIR/retrosmc/usr/bin/sudo"
             sudo chown root:root "$INSTALLDIR/retrosmc/etc/sudoers"
-            sudo chown root:root "$INSTALLDIR/retrosmc/etc/sudoers.d"
+            sudo chown -R root:root "$INSTALLDIR/retrosmc/etc/sudoers.d"
             sudo chown root:root "$INSTALLDIR/retrosmc/usr/bin/sudo"
+            sudo chown root:root "$INSTALLDIR/retrosmc/usr/lib/sudo/sudoers.so"
+            sudo chmod u+s "$INSTALLDIR/retrosmc/etc/sudoers"
+            sudo chmod -R u+s "$INSTALLDIR/retrosmc/etc/sudoers.d"
+            sudo chmod u+s "$INSTALLDIR/retrosmc/usr/bin/sudo"
+            sudo chmod u+s "$INSTALLDIR/retrosmc/usr/lib/sudo/sudoers.so"
+            unlink "$INSTALLDIR/retrosmc/etc/resolv.conf
             ln -s "$INSTALLDIR/retrosmc/home/pi/RetroPie/roms" /home/osmc/RetroPie/roms
             ln -s "$INSTALLDIR/retrosmc/home/pi/RetroPie/BIOS" /home/osmc/RetroPie/BIOS
-            cp "$INSTALLDIR/retrosmc/home/pi/RetroPie/scripts/*" /home/osmc/RetroPie/scripts/
-if [ ! "$(grep Action $INSTALLDIR/retrosmc/.emulationstation/es_input.cfg)" ]; then
+            wget -O /home/osmc/RetroPie/scripts/chroot.sh https://raw.githubusercontent.com/mcobit/retrosmc/chroot-approach/scripts/chroot.sh
+            wget -O /home/osmc/RetroPie/scripts/retropie.sh https://raw.githubusercontent.com/mcobit/retrosmc/chroot-approach/scripts/retropie.sh
+            wget -O /home/osmc/RetroPie/scripts/retropie_watchdog.sh https://raw.githubusercontent.com/mcobit/retrosmc/chroot-approach/scripts/retropie_watchdog.sh
+if [ ! "$(grep Action $INSTALLDIR/retrosmc/home/pi/.emulationstation/es_input.cfg)" ]; then
                 mkdir "$INSTALLDIR/retrosmc/home/pi/.emulationstation"
     cat > "$INSTALLDIR/retrosmc/home/pi/.emulationstation/es_input.cfg" << _EOF_
 <?xml version="1.0"?>
