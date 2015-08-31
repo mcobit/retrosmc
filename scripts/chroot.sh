@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source retrosmc-config.cfg
+source /home/osmc/RetroPie/scripts/retrosmc-config.cfg
 
 # Preparing the chroot
 
