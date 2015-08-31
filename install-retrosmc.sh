@@ -6,7 +6,7 @@
 
 CURRENT_VERSION="Alpha 0.006"
 CURRENT_ARCHIVE="https://github.com/mcobit/retrosmc/releases/download/Alpha0.006/retrosmc-3.0-rpi2.tar.bz2"
-CURRENT_SIZE="696994423"
+CURRENT_SIZE="696975403"
 source "/home/osmc/RetroPie/scripts/retrosmc-config.cfg"
 #wget --no-check-certificate -O versioncheck https://raw.githubusercontent.com/mcobit/retrosmc/master/install-retrosmc.sh 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Checking for update" --gauge "\nPlease wait...\n"  11 70
 
