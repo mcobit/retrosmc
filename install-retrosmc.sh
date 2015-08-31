@@ -62,6 +62,9 @@ do
             wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/chroot.sh https://raw.githubusercontent.com/mcobit/retrosmc/chroot-approach/scripts/chroot.sh
             wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie.sh https://raw.githubusercontent.com/mcobit/retrosmc/chroot-approach/scripts/retropie.sh
             wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie_watchdog.sh https://raw.githubusercontent.com/mcobit/retrosmc/chroot-approach/scripts/retropie_watchdog.sh
+            chmod +x /home/osmc/RetroPie/scripts/chroot.sh
+            chmod +x /home/osmc/RetroPie/scripts/retropie.sh
+            chmod +x /home/osmc/RetroPie/scripts/retropie_watchdog.sh
 if [ ! "$(grep Action $INSTALLDIR/retrosmc/home/pi/.emulationstation/es_input.cfg)" ]; then
                 mkdir "$INSTALLDIR/retrosmc/home/pi/.emulationstation"
     cat > "$INSTALLDIR/retrosmc/home/pi/.emulationstation/es_input.cfg" << _EOF_
