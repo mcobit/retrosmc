@@ -39,7 +39,7 @@ do
             INSTALLDIR="$(dialog --inputbox "Enter the path, retrosmc should be installed to.\nYou need at least 2.8GB of free space!\nDefault directory is /opt\nIf not sure, just press enter." 10 60 /opt 3>&1 1>&2 2>&3 3>&- )"
             dialog --title "Show install path." --clear --msgbox "\nretrosmc will be installed to $INSTALLDIR/retrosmc\n" 11 70
             sed -i '/INSTALLDIR/d' /home/osmc/RetroPie/scripts/retrosmc-config.cfg
-            echo INSTALLDIR="$INSTALLDIR" >> /home/osmc/RetroPie/scripts/retrosmc-config.cfg
+            echo INSTALLDIR=\""$INSTALLDIR"\" >> /home/osmc/RetroPie/scripts/retrosmc-config.cfg
             sudo apt-get update 2>&1 | dialog --title "Updating package database..." --infobox "\nPlease wait...\n" 11 70
             sudo apt-get --show-progress -y install dialog pv bzip2 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Installing dialog and pv programs if they are not present" --gauge "\nPlease wait...\n" 11 70
             wget --no-check-certificate -w 4 -O install.tar.bz2 $CURRENT_ARCHIVE 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading installation file" --gauge "\nPlease wait...\n"  11 70
