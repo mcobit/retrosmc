@@ -5,8 +5,8 @@
 # Using this is on your own risk.
 
 CURRENT_VERSION="Alpha 0.006"
-CURRENT_ARCHIVE="https://github.com/mcobit/retrosmc/releases/download/Alpha0.003/retrosmc-alpha-0.003.tar.bz2"
-CURRENT_SIZE="99070807"
+CURRENT_ARCHIVE="https://github.com/mcobit/retrosmc/releases/download/Alpha0.006/retrosmc-3.0-rpi2.tar.bz2"
+CURRENT_SIZE="696994423"
 source "/home/osmc/RetroPie/scripts/retrosmc-config.cfg"
 #wget --no-check-certificate -O versioncheck https://raw.githubusercontent.com/mcobit/retrosmc/master/install-retrosmc.sh 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Checking for update" --gauge "\nPlease wait...\n"  11 70
 
@@ -37,7 +37,7 @@ do
                touch "/home/osmc/RetroPie/scripts/retrosmc-config.cfg"
             fi
             INSTALLDIR="$(dialog --inputbox "Enter the path, retrosmc should be installed to.\nYou need at least 2.8GB of free space!\nDefault directory is /opt\nIf not sure, just press enter." 10 60 /opt 3>&1 1>&2 2>&3 3>&- )"
-            dialog --title "Really remove retrosmc?" --clear --msgbox "\nretrosmc will be installed to $INSTALLDIR/retrosmc\n" 11 70
+            dialog --title "Show install path." --clear --msgbox "\nretrosmc will be installed to $INSTALLDIR/retrosmc\n" 11 70
             sed -i '/INSTALLDIR/d' /home/osmc/RetroPie/scripts/retrosmc-config.cfg
             echo INSTALLDIR="$INSTALLDIR" >> /home/osmc/RetroPie/scripts/retrosmc-config.cfg
             sudo apt-get update 2>&1 | dialog --title "Updating package database..." --infobox "\nPlease wait...\n" 11 70
