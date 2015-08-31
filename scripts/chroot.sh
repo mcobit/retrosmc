@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source retrosmc-config.cfg
+
 # Preparing the chroot
 
 # Inserting the sound module for alsa output
@@ -8,25 +10,25 @@ sudo /sbin/modprobe snd-bcm2835sudo /sbin/modprobe snd-bcm2835
 
 # mount the needed host directories to chroot
 
-sudo mount -o bind /dev /opt/retropie-rootfs/dev
-sudo mount -o bind /sys /opt/retropie-rootfs/sys
-sudo mount -o bind /proc /opt/retropie-rootfs/proc
-sudo mount -o bind /boot /opt/retropie-rootfs/boot
-sudo mount -o bind /srv /opt/retropie-rootfs/srv
-sudo mount -o bind /run /opt/retropie-rootfs/run
-sudo mount -o bind /selinux /opt/retropie-rootfs/selinux
+sudo mount -o bind /dev "$INSTALLDIR/retrosmc/dev"
+sudo mount -o bind /sys "$INSTALLDIR/retrosmc/sys"
+sudo mount -o bind /proc "$INSTALLDIR/retrosmc/proc"
+sudo mount -o bind /boot "$INSTALLDIR/retrosmc/boot"
+sudo mount -o bind /srv "$INSTALLDIR/retrosmc/srv"
+sudo mount -o bind /run "$INSTALLDIR/retrosmc/run"
+sudo mount -o bind /selinux "$INSTALLDIR/retrosmc/selinux"
 
 # run emulationstation in the chroot with user pi
 
-sudo HOME="/home/pi" /usr/sbin/chroot --userspec 1000:1000 /opt/retropie-rootfs emulationstation
+sudo HOME="/home/pi" /usr/sbin/chroot --userspec 1000:1000 "$INSTALLDIR/retrosmc" emulationstation
 
 # unmount the hostdirs from chroot
 
-sudo umount /opt/retropie-rootfs/dev
-sudo umount /opt/retropie-rootfs/sys
-sudo umount /opt/retropie-rootfs/proc
-sudo umount /opt/retropie-rootfs/boot
-sudo umount /opt/retropie-rootfs/srv
-sudo umount /opt//retropie-rootfs/run
-sudo umount /opt/retropie-rootfs/selinux
+sudo umount "$INSTALLDIR/retrosmc/dev"
+sudo umount "$INSTALLDIR/retrosmc/sys"
+sudo umount "$INSTALLDIR/retrosmc/proc"
+sudo umount "$INSTALLDIR/retrosmc/boot"
+sudo umount "$INSTALLDIR/retrosmc/srv"
+sudo umount "$INSTALLDIR/retrosmc/run"
+sudo umount "$INSTALLDIR/retrosmc/selinux"
 
