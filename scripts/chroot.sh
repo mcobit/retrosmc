@@ -26,7 +26,14 @@ sudo mount -o bind /selinux "$INSTALLDIR/retrosmc/selinux"
 
 sudo HOME="/home/pi" /usr/sbin/chroot --userspec 1000:1000 "$INSTALLDIR/retrosmc" emulationstation
 
-# unmount the hostdirs from chroot
+# kill processes still using the mountpoints and unmount the hostdirs from chroot
+
+sudo fuser -k "$INSTALLDIR/retrosmc/dev"
+sudo fuser -k "$INSTALLDIR/retrosmc/sys"
+sudo fuser -k "$INSTALLDIR/retrosmc/proc"
+sudo fuser -k "$INSTALLDIR/retrosmc/boot"
+sudo fuser -k "$INSTALLDIR/retrosmc/srv"
+sudo fuser -k "$INSTALLDIR/retrosmc/run"
 
 sudo umount "$INSTALLDIR/retrosmc/dev"
 sudo umount "$INSTALLDIR/retrosmc/sys"
