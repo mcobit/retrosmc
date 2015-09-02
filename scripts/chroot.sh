@@ -1,4 +1,7 @@
 #!/bin/bash
+# Script by mcobit
+
+# import config file
 
 source /home/osmc/RetroPie/scripts/retrosmc-config.cfg
 
@@ -22,7 +25,7 @@ sudo mount -o bind /srv "$INSTALLDIR/retrosmc/srv"
 sudo mount -o bind /run "$INSTALLDIR/retrosmc/run"
 sudo mount -o bind /selinux "$INSTALLDIR/retrosmc/selinux"
 
-# run emulationstation in the chroot with user pi
+# run emulationstation in the chroot with user pi (uuid 1000)
 
 sudo HOME="/home/pi" /usr/sbin/chroot --userspec 1000:1000 "$INSTALLDIR/retrosmc" emulationstation
 
