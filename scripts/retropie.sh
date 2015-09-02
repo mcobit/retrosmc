@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # This scripts starts the emulationstation watchdog deamon and
 # emulationstation itself while stopping KODI afterwards.
 # Script by mcobit

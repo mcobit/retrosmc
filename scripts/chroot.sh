@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Script by mcobit
 
 # import config file

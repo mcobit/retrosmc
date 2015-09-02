@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Script by mcobit
+
 # wait a bit to give emulationstation time to start up
 
 sleep 2

@@ -3,12 +3,29 @@
 # This is a script by mcobit to install retrosmc to OSMC.
 # I am not responsible for any harm done to your system.
 # Using this is on your own risk.
+# Script by mcobit
 
-# set some variables
+# determine platform
 
-CURRENT_VERSION="Alpha 0.006"
-CURRENT_ARCHIVE="https://github.com/mcobit/retrosmc/releases/download/Alpha0.006/retrosmc-3.0-rpi2.tar.bz2"
-CURRENT_SIZE="696975403"
+if [ $(sed -n '/^Hardware/s/^.*: \(.*\)/\1/p' < /proc/cpuinfo) == BCM2708 ]; then
+       PIVERSION="1"
+elif [ $(sed -n '/^Hardware/s/^.*: \(.*\)/\1/p' < /proc/cpuinfo) == BCM2709 ]; then
+       PIVERSION="2"
+else
+       echo "This script only works on a Raspberry Pi!"
+fi
+
+# set some variables depending on the detected platform
+
+if [ $PIVERSION == 2 ]; then
+     CURRENT_VERSION="Alpha 0.006"
+     CURRENT_ARCHIVE="https://github.com/mcobit/retrosmc/releases/download/Alpha0.006/retrosmc-3.0-rpi2.tar.bz2"
+     CURRENT_SIZE="696975403"
+else
+     CURRENT_VERSION="Alpha 0.006"
+     CURRENT_ARCHIVE="https://github.com/mcobit/retrosmc/releases/download/Alpha0.006/retrosmc-3.0-rpi1.tar.bz2"
+     CURRENT_SIZE="696975403"
+fi
 
 # import variables from configfile
 
