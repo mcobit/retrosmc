@@ -7,13 +7,15 @@
 
 # determine platform
 
-if [ $(sed -n '/^Hardware/s/^.*: \(.*\)/\1/p' < /proc/cpuinfo) == BCM2708 ]; then
+if [ "$(sed -n '/^Hardware/s/^.*: \(.*\)/\1/p' < /proc/cpuinfo)" == "BCM2708" ]; then
        PIVERSION="1"
-elif [ $(sed -n '/^Hardware/s/^.*: \(.*\)/\1/p' < /proc/cpuinfo) == BCM2709 ]; then
+elif [ "$(sed -n '/^Hardware/s/^.*: \(.*\)/\1/p' < /proc/cpuinfo)" == "BCM2709" ]; then
        PIVERSION="2"
 else
        echo "This script only works on a Raspberry Pi!"
 fi
+
+echo "Running on Raspberry Pi version $PIVERSION"
 
 # set some variables depending on the detected platform
 
