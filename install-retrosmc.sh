@@ -21,12 +21,12 @@ echo "Running on Raspberry Pi version $PIVERSION"
 
 if [ $PIVERSION == 2 ]; then
      CURRENT_VERSION="Alpha 0.006"
-     CURRENT_ARCHIVE="https://github.com/mcobit/retrosmc/releases/download/Alpha0.006/retrosmc-3.0-rpi2.tar.bz2"
-     CURRENT_SIZE="696975403"
+     CURRENT_ARCHIVE="http://collaborate.osmc.tv/index.php/s/0ryXu0ekpj7Vd34/download"
+     CURRENT_SIZE="696974338"
 else
      CURRENT_VERSION="Alpha 0.006"
-     CURRENT_ARCHIVE="https://github.com/mcobit/retrosmc/releases/download/Alpha0.006/retrosmc-3.0-rpi1.tar.bz2"
-     CURRENT_SIZE="696975403"
+     CURRENT_ARCHIVE="http://collaborate.osmc.tv/index.php/s/gO8kGERuehh8ok2/download"
+     CURRENT_SIZE="694122657"
 fi
 
 # import variables from configfile
@@ -123,9 +123,9 @@ do
 
 # download the retrosmc scripts and make them executable
 
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/chroot.sh https://raw.githubusercontent.com/mcobit/retrosmc/chroot-approach/scripts/chroot.sh
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie.sh https://raw.githubusercontent.com/mcobit/retrosmc/chroot-approach/scripts/retropie.sh
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie_watchdog.sh https://raw.githubusercontent.com/mcobit/retrosmc/chroot-approach/scripts/retropie_watchdog.sh
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/chroot.sh http://collaborate.osmc.tv/index.php/s/Kh2VLjIuxvnuFBC/download
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie.sh http://collaborate.osmc.tv/index.php/s/wQFzG95ZK9rxUdP/download
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie_watchdog.sh http://collaborate.osmc.tv/index.php/s/rkWCRvikjPQUlGE/download
             chmod +x /home/osmc/RetroPie/scripts/chroot.sh
             chmod +x /home/osmc/RetroPie/scripts/retropie.sh
             chmod +x /home/osmc/RetroPie/scripts/retropie_watchdog.sh
