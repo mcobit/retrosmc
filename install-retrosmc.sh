@@ -25,8 +25,8 @@ if [ $PIVERSION == 2 ]; then
      CURRENT_SIZE="696974338"
 else
      CURRENT_VERSION="Alpha 0.006"
-     CURRENT_ARCHIVE="http://collaborate.osmc.tv/index.php/s/gO8kGERuehh8ok2/download"
-     CURRENT_SIZE="694122657"
+     CURRENT_ARCHIVE="http://collaborate.osmc.tv/index.php/s/0Q0BtNdFTNlFi36/download"
+     CURRENT_SIZE="694127996"
 fi
 
 # import variables from configfile
