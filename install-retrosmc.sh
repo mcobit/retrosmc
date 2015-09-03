@@ -3,21 +3,50 @@
 # This is a script by mcobit to install retrosmc to OSMC.
 # I am not responsible for any harm done to your system.
 # Using this is on your own risk.
+# Script by mcobit
 
-CURRENT_VERSION="Alpha 0.005"
-CURRENT_ARCHIVE="https://github.com/mcobit/retrosmc/releases/download/Alpha0.003/retrosmc-alpha-0.003.tar.bz2"
-CURRENT_SIZE="99070807"
+# determine platform
 
-wget --no-check-certificate -O versioncheck https://raw.githubusercontent.com/mcobit/retrosmc/master/install-retrosmc.sh 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Checking for update" --gauge "\nPlease wait...\n"  11 70
-
-if [ "$(grep CURRENT_VERSION ./versioncheck)" != "$(grep CURRENT_VERSION ./install-retrosmc.sh)" ]; then
- cp ./versioncheck ./install-retrosmc.sh
- rm ./versioncheck
- dialog --title "Script updated" --msgbox "\nSuccessfully updated install-retrosmc script.\nPress OK to restart it!\n" 11 70
- ./install-retrosmc.sh
- exit 0
+if [ "$(sed -n '/^Hardware/s/^.*: \(.*\)/\1/p' < /proc/cpuinfo)" == "BCM2708" ]; then
+       PIVERSION="1"
+elif [ "$(sed -n '/^Hardware/s/^.*: \(.*\)/\1/p' < /proc/cpuinfo)" == "BCM2709" ]; then
+       PIVERSION="2"
+else
+       echo "This script only works on a Raspberry Pi!"
 fi
-rm ./versioncheck
+
+echo "Running on Raspberry Pi version $PIVERSION"
+
+# set some variables depending on the detected platform
+
+if [ $PIVERSION == 2 ]; then
+     CURRENT_VERSION="Alpha 0.006"
+     CURRENT_ARCHIVE="http://collaborate.osmc.tv/index.php/s/0ryXu0ekpj7Vd34/download"
+     CURRENT_SIZE="696974338"
+else
+     CURRENT_VERSION="Alpha 0.006"
+     CURRENT_ARCHIVE="http://collaborate.osmc.tv/index.php/s/0Q0BtNdFTNlFi36/download"
+     CURRENT_SIZE="694127996"
+fi
+
+# import variables from configfile
+
+source "/home/osmc/RetroPie/scripts/retrosmc-config.cfg"
+
+# check for newer version of this script
+
+#wget --no-check-certificate -O versioncheck https://raw.githubusercontent.com/mcobit/retrosmc/master/install-retrosmc.sh 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Checking for update" --gauge "\nPlease wait...\n"  11 70
+
+#if [ "$(grep CURRENT_VERSION ./versioncheck)" != "$(grep CURRENT_VERSION ./install-retrosmc.sh)" ]; then
+# cp ./versioncheck ./install-retrosmc.sh
+# rm ./versioncheck
+# dialog --title "Script updated" --msgbox "\nSuccessfully updated install-retrosmc script.\nPress OK to restart it!\n" 11 70
+# ./install-retrosmc.sh
+# exit 0
+#fi
+#rm ./versioncheck
+
+# setting up the menu
 
 cmd=(dialog --backtitle "retrosmc installation - Version $CURRENT_VERSION" --menu "Welcome to the retrosmc installation.\nWhat would you like to do?\n " 13 50 16)
 
@@ -32,24 +61,80 @@ for choice in $choices
 do
     case $choice in
         1)
+# create the config directory
+
+            mkdir -p /home/osmc/RetroPie/scripts
+            if [ ! "/home/osmc/RetroPie/scripts/retrosmc-config.cfg" ]; then
+               touch "/home/osmc/RetroPie/scripts/retrosmc-config.cfg"
+            fi
+
+# get the installationdirectory from userinput (default is /opt)
+
+            INSTALLDIR="$(dialog --inputbox "Enter the path, retrosmc should be installed to.\nYou need at least 2.8GB of free space!\nDefault directory is /opt\nIf not sure, just press enter." 10 60 /opt 3>&1 1>&2 2>&3 3>&- )"
+            dialog --title "Show install path." --clear --msgbox "\nretrosmc will be installed to $INSTALLDIR/retrosmc\n" 11 70
+
+# if there is a directory already specified, delete that line
+
+            sed -i '/INSTALLDIR/d' /home/osmc/RetroPie/scripts/retrosmc-config.cfg
+
+# add new installationdir to configfile
+
+            echo INSTALLDIR=\""$INSTALLDIR"\" >> /home/osmc/RetroPie/scripts/retrosmc-config.cfg
+
+# install some programs needed to run the installation and retrosmc
+
             sudo apt-get update 2>&1 | dialog --title "Updating package database..." --infobox "\nPlease wait...\n" 11 70
-            sudo apt-get --show-progress -y install dialog pv bzip2 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Installing dialog and pv programs if they are not present" --gauge "\nPlease wait...\n" 11 70
+            sudo apt-get --show-progress -y install dialog pv bzip2 psmisc 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Installing dialog and pv programs if they are not present" --gauge "\nPlease wait...\n" 11 70
+
+# get the installationfile from server and check if it has the right size, redownload if not
+
             wget --no-check-certificate -w 4 -O install.tar.bz2 $CURRENT_ARCHIVE 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading installation file" --gauge "\nPlease wait...\n"  11 70
             while [ $(stat -c%s install.tar.bz2) != $CURRENT_SIZE ]; do
-            wget --no-check-certificate -w 4 -O install.tar.bz2 $CURRENT_ARCHIVE 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading installation file" --gauge "\nPlease wait...\n"  11 70
+                  wget --no-check-certificate -w 4 -O install.tar.bz2 $CURRENT_ARCHIVE 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading installation file" --gauge "\nPlease wait...\n"  11 70
             done
-	    mkdir /home/osmc/RetroPie/backup
-#	    cp -r /opt/retropie/configs /home/osmc/RetroPie/backup/ | dialog --title "Backing up old configuration" --infobox "\nPlease wait...\n" 11 70
-            (pv -n install.tar.bz2 | sudo tar xjf - -C / ) 2>&1 | dialog --title "Extracting installation file" --gauge "\nPlease wait...\n" 11 70
-            sudo chown -R osmc:osmc /opt/retropie | dialog --title "Fixing permissions for retropie" --infobox "\nPlease wait...\n" 11 70
-            sudo chown -R osmc:osmc /home/osmc/RetroPie | dialog --title "Fixing permissions for retropie" --infobox "\nPlease wait...\n" 11 70
-            sudo chown -R osmc:osmc /etc/emulationstation | dialog --title "Fixing permissions for emulationstation" --infobox "\nPlease wait...\n" 11 70
-#	    cp -r /home/osmc/RetroPie/backup/configs /opt/retropie/ | dialog --title "Restoring old configuration" --infobox "\nPlease wait...\n" 11 70
+
+# extract the installationfile to the specified directory
+
+            (pv -n install.tar.bz2 | sudo tar xjf - -C $INSTALLDIR/ ) 2>&1 | dialog --title "Extracting installation file" --gauge "\nPlease wait...\n" 11 70
+
+# delete the file to safe space
+
             rm install.tar.bz2 | dialog --title "Deleting temporary installation file" --infobox "\nPlease wait...\n" 11 70
 
-if [ ! "$(grep Action /home/osmc/.emulationstation/es_input.cfg)" ]; then
-                mkdir "/home/osmc/.emulationstation"
-    cat > "/home/osmc/.emulationstation/es_input.cfg" << _EOF_
+# fix permissions in the chroot environment to make sudo work
+
+            sudo chown root:root "$INSTALLDIR/retrosmc/etc/sudoers"
+            sudo chown -R root:root "$INSTALLDIR/retrosmc/etc/sudoers.d"
+            sudo chown root:root "$INSTALLDIR/retrosmc/usr/bin/sudo"
+            sudo chown root:root "$INSTALLDIR/retrosmc/usr/lib/sudo/sudoers.so"
+            sudo chmod u+s "$INSTALLDIR/retrosmc/etc/sudoers"
+            sudo chmod -R u+s "$INSTALLDIR/retrosmc/etc/sudoers.d"
+            sudo chmod u+s "$INSTALLDIR/retrosmc/usr/bin/sudo"
+            sudo chmod u+s "$INSTALLDIR/retrosmc/usr/lib/sudo/sudoers.so"
+
+# unlink the resolv.conf in the chroot image (will not be needed anymore with a fixed image)
+
+            unlink "$INSTALLDIR/retrosmc/etc/resolv.conf"
+
+# symlink the BIOS and romdirectories to have easy access from the home folder
+
+            ln -s "$INSTALLDIR/retrosmc/home/pi/RetroPie/roms" /home/osmc/RetroPie/roms
+            ln -s "$INSTALLDIR/retrosmc/home/pi/RetroPie/BIOS" /home/osmc/RetroPie/BIOS
+
+# download the retrosmc scripts and make them executable
+
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/chroot.sh http://collaborate.osmc.tv/index.php/s/Kh2VLjIuxvnuFBC/download
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie.sh http://collaborate.osmc.tv/index.php/s/wQFzG95ZK9rxUdP/download
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie_watchdog.sh http://collaborate.osmc.tv/index.php/s/rkWCRvikjPQUlGE/download
+            chmod +x /home/osmc/RetroPie/scripts/chroot.sh
+            chmod +x /home/osmc/RetroPie/scripts/retropie.sh
+            chmod +x /home/osmc/RetroPie/scripts/retropie_watchdog.sh
+
+# check for the right configuration and existance of the es_input file to ensure joystick autoconfig to work (important on update)
+
+            if [ ! "$(grep Action $INSTALLDIR/retrosmc/home/pi/.emulationstation/es_input.cfg)" ]; then
+                mkdir "$INSTALLDIR/retrosmc/home/pi/.emulationstation"
+                cat > "$INSTALLDIR/retrosmc/home/pi/.emulationstation/es_input.cfg" << _EOF_
 <?xml version="1.0"?>
 <inputList>
   <inputAction type="onfinish">
@@ -57,41 +142,78 @@ if [ ! "$(grep Action /home/osmc/.emulationstation/es_input.cfg)" ]; then
   </inputAction>
 </inputList>
 _EOF_
-fi
+            fi
+
+# end installation
+
             dialog --title "FINISHED!" --msgbox "\nEnjoy your retrosmc installation!\nPress OK to return to the menu.\n" 11 70
+
+# restart script
+
             ./install-retrosmc.sh
             ;;
         2)
+
+# ask if the user really wants to uninstall and warn about loosing roms, BIOS and configfiles
+
             dialog --title "Really remove retrosmc?" --clear \
             --yesno "\nDo you really want to uninstall retrosmc?\nAll ROMS, configuration files etc. will also be removed\n" 11 70
             case $? in
                  0)
-                 sudo rm -r /opt/retropie | dialog --title "Removing /opt/retropie" --infobox "\nPlease wait...\n" 11 70
-                 sudo rm -r /home/osmc/RetroPie | dialog --title "Removing /home/osmc/RetroPie" --infobox "\nPlease wait...\n" 11 70
-                 sudo rm -r /etc/emulationstation | dialog --title "Removing /etc/emulationstation" --infobox "\nPlease wait...\n" 11 70
-                 sudo rm -r /home/osmc/.emulationstation | dialog --title "Removing /home/osmc/.emulationstation" --infobox "\nPlease wait...\n" 11 70
-                 sudo rm /usr/bin/emulationstation | dialog --title "Removing /usr/bin/emulationstation" --infobox "\nPlease wait...\n" 11 70
+
+# delete all retrosmc related files
+
+		 sudo rm -r "$INSTALLDIR/retrosmc"
+                 sudo rm -r /home/osmc/RetroPie
+
                  dialog --title "FINISHED!" --msgbox "\nSuccessfully uninstalled retrosmc!\nPress OK to return to the menu.\n" 11 70
                  ;;
 	         1)
+
+# abort uninstallation
+
                  dialog --title "Uninstallation aborted" --msgbox "\nNot uninstalling retrosmc\n" 11 70
                  ;;
                  255)
+
+# abort uninstallation
+
                  dialog --title "Uninstallation aborted" --msgbox "\nNot uninstalling retrosmc\n" 11 70
                  ;;
                  esac
+
+# restart script
+
                  ./install-retrosmc.sh
                  ;;
         3)
+
+# get the addon archive file from github
+
 	  wget --no-check-certificate -w 4 -O plugin.program.retropie-launcher-0.0.1.tgz https://raw.githubusercontent.com/jcnventura/retrosmc/feature/launcher-plugin/plugin.program.retropie-launcher-0.0.1.tgz 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading Addon" --gauge "\nPlease wait...\n"  11 70
+
+# extract the addon to the kodi addon directory
+
 	  (pv -n plugin.program.retropie-launcher-0.0.1.tgz | sudo tar xzf - -C /home/osmc/ ) 2>&1 | dialog --title "Extracting Addon" --gauge "\nPlease wait...\n" 11 70
 	  dialog --backtitle "RetroPie-OSMC setup script" --title "Installing Addon" --msgbox "\nAddon installed.\n" 11 70
+
+# remove archive file
+
           rm plugin.program.retropie-launcher-0.0.1.tgz
+
+# restart script
+
             ./install-retrosmc.sh
             ;;
         4)
+
+# delete the addon from kodi addon directory
+
 	   rm -r /home/osmc/.kodi/addons/plugin.program.retropie-launcher
 	   dialog --backtitle "RetroPie-OSMC setup script" --title "Removing Addon" --msgbox "\nAddon removed.\n" 11 70
+
+# restart script
+
             ./install-retrosmc.sh
             ;;
     esac
