@@ -4,7 +4,7 @@
 
 # wait a bit to give emulationstation time to start up
 
-sleep 2
+sleep 8
 
 # check for emulationstation running
 
