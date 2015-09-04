@@ -48,12 +48,13 @@ source "/home/osmc/RetroPie/scripts/retrosmc-config.cfg"
 
 # setting up the menu
 
-cmd=(dialog --backtitle "retrosmc installation - Version $CURRENT_VERSION" --menu "Welcome to the retrosmc installation.\nWhat would you like to do?\n " 13 50 16)
+cmd=(dialog --backtitle "retrosmc installation - Version $CURRENT_VERSION" --menu "Welcome to the retrosmc installation.\nWhat would you like to do?\n " 14 50 16)
 
 options=(1 "Install retrosmc"
          2 "Uninstall retrosmc"
          3 "Install Launcher Addon"
-         4 "Remove Launcher Addon")
+         4 "Remove Launcher Addon"
+         5 "Update scripts")
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
@@ -215,6 +216,37 @@ _EOF_
 
 	   rm -r /home/osmc/.kodi/addons/plugin.program.retropie-launcher
 	   dialog --backtitle "RetroPie-OSMC setup script" --title "Removing Addon" --msgbox "\nAddon removed.\n" 11 70
+
+# restart script
+
+            ./install-retrosmc.sh
+            ;;
+        5)
+
+# download new versions of all scripts and make them executable
+
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/chroot.sh.1 http://collaborate.osmc.tv/index.php/s/Kh2VLjIuxvnuFBC/download
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie.sh.1 http://collaborate.osmc.tv/index.php/s/wQFzG95ZK9rxUdP/download
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie_watchdog.sh.1 http://collaborate.osmc.tv/index.php/s/rkWCRvikjPQUlGE/download
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/video.sh.1 http://collaborate.osmc.tv/index.php/s/vLxapLqD9i7HBpr/download
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/kodi_es.mp4.1 http://collaborate.osmc.tv/index.php/s/npHU07Xuuo47L9Q/download
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/es_kodi.mp4.1 http://collaborate.osmc.tv/index.php/s/wpDPrnWlxcgaAbe/download
+            wget --no-check-certificate -w 4 -O /home/osmc/install-retrosmc.sh.1 http://collaborate.osmc.tv/index.php/s/pUnX187z29OGN9H/download
+            chmod +x /home/osmc/RetroPie/scripts/chroot.sh.1
+            chmod +x /home/osmc/RetroPie/scripts/retropie.sh.1
+            chmod +x /home/osmc/RetroPie/scripts/retropie_watchdog.sh.1
+            chmod +x /home/osmc/RetroPie/scripts/video.sh.1
+            chmod +x /home/osmc/install-retrosmc.sh.1
+
+# replace old with new scripts
+
+            mv /home/osmc/install-retrosmc.sh.1 /home/osmc/install-retrosmc.sh
+            mv /home/osmc/RetroPie/scripts/chroot.sh.1 /home/osmc/RetroPie/scripts/chroot.sh
+            mv /home/osmc/RetroPie/scripts/retropie.sh.1 /home/osmc/RetroPie/scripts/retropie.sh
+            mv /home/osmc/RetroPie/scripts/retropie_watchdog.sh.1 /home/osmc/RetroPie/scripts/retropie_watchdog.sh
+            mv /home/osmc/RetroPie/scripts/video.sh.1 /home/osmc/RetroPie/scripts/video.sh
+            mv /home/osmc/RetroPie/scripts/kodi_es.mp4.1 /home/osmc/RetroPie/scripts/kodi_es.mp4
+            mv /home/osmc/RetroPie/scripts/es_kodi.mp4.1 /home/osmc/RetroPie/scripts/es_kodi.mp4
 
 # restart script
 
