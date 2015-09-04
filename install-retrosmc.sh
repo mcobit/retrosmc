@@ -126,9 +126,13 @@ do
             wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/chroot.sh http://collaborate.osmc.tv/index.php/s/Kh2VLjIuxvnuFBC/download
             wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie.sh http://collaborate.osmc.tv/index.php/s/wQFzG95ZK9rxUdP/download
             wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie_watchdog.sh http://collaborate.osmc.tv/index.php/s/rkWCRvikjPQUlGE/download
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/video.sh http://collaborate.osmc.tv/index.php/s/vLxapLqD9i7HBpr/download
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/kodi_es.mp4 http://collaborate.osmc.tv/index.php/s/npHU07Xuuo47L9Q/download
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/es_kodi.mp4 http://collaborate.osmc.tv/index.php/s/wpDPrnWlxcgaAbe/download
             chmod +x /home/osmc/RetroPie/scripts/chroot.sh
             chmod +x /home/osmc/RetroPie/scripts/retropie.sh
             chmod +x /home/osmc/RetroPie/scripts/retropie_watchdog.sh
+            chmod +x /home/osmc/RetroPie/scripts/video.sh
 
 # check for the right configuration and existance of the es_input file to ensure joystick autoconfig to work (important on update)
 

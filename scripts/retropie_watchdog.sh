@@ -2,7 +2,9 @@
 
 # Script by mcobit
 
-# wait a bit to give emulationstation time to start up
+# play the transition video and wait a bit to give emulationstation time to start up
+
+/home/osmc/RetroPie/scripts/video.sh in &
 
 sleep 8
 
@@ -15,23 +17,11 @@ while [ true ]; do
 
 		if [ ! "$VAR1" ]; then
 			sudo openvt -c 7 -s -f clear
-			sudo openvt -c 7 -s -f echo "Emulationstation quit... Starting KODI."
+# play the transition video and restart kodi
 
-# wait a second to show the message
-
-			sleep 1
-
-# clear the screen again
-
-			sudo openvt -c 7 -f clear
-
-# restart kodi
-
+			/home/osmc/RetroPie/scripts/video.sh out &
+			sleep 4
 			sudo su -c "sudo systemctl restart mediacenter &" &
-
-# wait a second (probably for no good reason, but it seemed to work better this way)
-
-			sleep 1
 
 # exit script
 
@@ -43,3 +33,4 @@ while [ true ]; do
 			sleep 2
 fi
 done
+exit

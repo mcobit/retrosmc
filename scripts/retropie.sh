@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 # This scripts starts the emulationstation watchdog deamon and
@@ -7,10 +8,6 @@
 #clear the virtaul terminal 7 screen
 
 sudo openvt -c 7 -s -f clear
-
-# display a short message (user most likely won't see it as emulationstation is starting very fast
-
-sudo openvt -c 7 -s -f echo "Running emulationstation from KODI"
 
 # start the watchdog script
 
@@ -26,7 +23,7 @@ sudo openvt -c 7 -s -f clear
 
 # wait a bit to make sure emulationstation is running detached from kodi
 
-sleep 2
+sleep 0.5
 
 # stop kodi to free input devices for emulationstation
 
