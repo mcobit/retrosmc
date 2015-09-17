@@ -78,9 +78,18 @@ do
 
             sed -i '/INSTALLDIR/d' /home/osmc/RetroPie/scripts/retrosmc-config.cfg
 
-# add new installationdir to configfile
+# add new installationdir and other parameters to configfile if not present
 
             echo INSTALLDIR=\""$INSTALLDIR"\" >> /home/osmc/RetroPie/scripts/retrosmc-config.cfg
+            if [ $(grep CECFIX /home/osmc/RetroPie/scripts/retrosmc-config.cfg) ]; then
+           ´   echo CECFIX=0 >> /home/osmc/RetroPie/scripts/retrosmc-config.cfg
+            fi
+            if [ $(grep TRANSITIONVID /home/osmc/RetroPie/scripts/retrosmc-config.cfg) ]; then
+                echo TRANSITIONVID=0 >> /home/osmc/RetroPie/scripts/retrosmc-config.cfg
+            fi
+            if [ $(grep HYPERIONFIX /home/osmc/RetroPie/scripts/retrosmc-config.cfg) ]; then
+                echo HYPERIONFIX=0 >> /home/osmc/RetroPie/scripts/retrosmc-config.cfg
+            fi
 
 # install some programs needed to run the installation and retrosmc
 
