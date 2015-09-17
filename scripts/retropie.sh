@@ -5,7 +5,7 @@
 # emulationstation itself while stopping KODI afterwards.
 # Script by mcobit
 
-#clear the virtaul terminal 7 screen
+# clear the virtual terminal 7 screen
 
 sudo openvt -c 7 -s -f clear
 
@@ -23,7 +23,7 @@ sudo openvt -c 7 -s -f clear
 
 # wait a bit to make sure emulationstation is running detached from kodi
 
-sleep 0.5
+sleep 1
 
 # stop kodi to free input devices for emulationstation
 

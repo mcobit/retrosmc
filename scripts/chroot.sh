@@ -12,6 +12,26 @@ source /home/osmc/RetroPie/scripts/retrosmc-config.cfg
 
 sudo /sbin/modprobe snd-bcm2835
 
+# check if emulationstation script in chroot is changed and if so, create altered script
+
+if [ $(grep "while" "$INSTALLDIR/retrosmc/usr/bin/emulationstation") ]; then
+
+echo '#!/bin/bash
+es_bin="/opt/retropie/supplementary/emulationstation/emulationstation"
+
+if [[ $(id -u) -eq 0 ]]; then
+    echo "emulationstation should not be run as root. If you used 'sudo emulationstation' please run without sudo."
+    exit 1
+fi
+
+if [[ -n "$(pidof X)" ]]; then
+    echo "X is running. Please shut down X in order to mitigate problems with loosing keyboard input. For example, logout from LXDE."
+    exit 1
+fi
+
+$es_bin "$@"' > "$INSTALLDIR/retrosmc/usr/bin/emulationstation"
+fi
+
 # copy current resolv.conf to chroot
 
 sudo cp /etc/resolv.conf "$INSTALLDIR/retrosmc/etc/resolv.conf"
