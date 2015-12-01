@@ -26,12 +26,10 @@ for choice in $choices
 do
     case $choice in
         1)
-# create the config directory
+# create the config directory and file
 
             mkdir -p /home/osmc/RetroPie/scripts
-            if [ ! "/home/osmc/RetroPie/scripts/retrosmc-config.cfg" ]; then
-               touch "/home/osmc/RetroPie/scripts/retrosmc-config.cfg"
-            fi
+            touch "/home/osmc/RetroPie/scripts/retrosmc-config.cfg"
 
 # install some programs needed to run the installation and retrosmc
 
