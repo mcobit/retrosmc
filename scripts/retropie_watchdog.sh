@@ -42,6 +42,10 @@ while [ true ]; do
 		if [ ! "$VAR1" ]; then
 			sudo openvt -c 7 -s -f clear
 
+# restart kodi
+
+	sudo su -c "sudo systemctl restart mediacenter &" &
+
 # exit script
 
 			exit
