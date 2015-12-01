@@ -13,6 +13,22 @@ sudo openvt -c 7 -s -f clear
 
 sudo su osmc -c "sh /home/osmc/RetroPie/scripts/retropie_watchdog.sh &" &
 
+# check if emulationstation script in chroot is changed and if so, create altered script
+
+sudo chown osmc:osmc /usr/bin/emulationstation
+
+echo '#!/bin/bash
+es_bin="/opt/retropie/supplementary/emulationstation/emulationstation"
+if [[ $(id -u) -eq 0 ]]; then
+    echo "emulationstation should not be run as root. If you used 'sudo emulationstation' please run without sudo."
+    exit 1
+fi
+if [[ -n "$(pidof X)" ]]; then
+    echo "X is running. Please shut down X in order to mitigate problems with loosing keyboard input. For example, logout from LXDE."
+    exit 1
+fi
+$es_bin "$@"' > "/usr/bin/emulationstation"
+
 # start chroot.sh script on virtual terminal 7 and detach it
 
 sudo su osmc -c "nohup openvt -c 7 -f -s emulationstation >/dev/null 2>&1 &" &

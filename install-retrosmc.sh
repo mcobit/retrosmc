@@ -70,6 +70,12 @@ do
 _EOF_
             fi
 
+# add fix to config.txt for sound
+
+if [[ ! $(grep "dtparam=audio=on" "/boot/config.txt") ]]; then
+sudo su -c 'echo -e "dtparam=audio=on" >> "/boot/config.txt"'
+fi
+
 # end installation
 
             dialog --title "FINISHED!" --msgbox "\nEnjoy your retrosmc installation!\nPress OK to return to the menu.\n" 11 70
