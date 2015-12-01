@@ -36,19 +36,25 @@ do
             sudo apt-get update 2>&1 | dialog --title "Updating package database..." --infobox "\nPlease wait...\n" 11 70
             sudo apt-get --show-progress -y install dialog git pv bzip2 psmisc libusb-1.0 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Installing dialog and pv programs if they are not present" --gauge "\nPlease wait...\n" 11 70
 
-# clone the retropie git and start the installation
-
-            cd
-            git clone git://github.com/petrockblog/RetroPie-Setup.git
-            cd /home/osmc/RetroPie-Setup
-            sudo ./retropie_setup.sh
-
 # download the retrosmc scripts and files
 
             wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie.sh https://raw.githubusercontent.com/mcobit/retrosmc/direct/scripts/retropie.sh
             wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie_watchdog.sh https://raw.githubusercontent.com/mcobit/retrosmc/direct/scripts/retropie_watchdog.sh
             chmod +x /home/osmc/RetroPie/scripts/retropie.sh
             chmod +x /home/osmc/RetroPie/scripts/retropie_watchdog.sh
+
+# add fix to config.txt for sound
+
+if [[ ! $(grep "dtparam=audio=on" "/boot/config.txt") ]]; then
+sudo su -c 'echo -e "dtparam=audio=on" >> "/boot/config.txt"'
+fi
+
+# clone the retropie git and start the installation
+
+            cd
+            git clone git://github.com/petrockblog/RetroPie-Setup.git
+            cd /home/osmc/RetroPie-Setup
+            sudo ./retropie_setup.sh
 
 # check for the right configuration and existance of the es_input file to ensure joystick autoconfig to work (important on update)
 
@@ -63,12 +69,6 @@ do
 </inputList>
 _EOF_
             fi
-
-# add fix to config.txt for sound
-
-if [[ ! $(grep "dtparam=audio=on" "/boot/config.txt") ]]; then
-sudo su -c 'echo -e "dtparam=audio=on" >> "/boot/config.txt"'
-fi
 
 # end installation
 
