@@ -15,7 +15,7 @@ sudo su osmc -c "sh /home/osmc/RetroPie/scripts/retropie_watchdog.sh &" &
 
 # start chroot.sh script on virtual terminal 7 and detach it
 
-sudo su osmc -c "nohup openvt -c 7 -f -s /home/osmc/RetroPie/scripts/chroot.sh >/dev/null 2>&1 &" &
+sudo su osmc -c "nohup openvt -c 7 -f -s emulationstation >/dev/null 2>&1 &" &
 
 # clear the screen again
 
