@@ -36,7 +36,14 @@ do
 # install some programs needed to run the installation and retrosmc
 
             sudo apt-get update 2>&1 | dialog --title "Updating package database..." --infobox "\nPlease wait...\n" 11 70
-            sudo apt-get --show-progress -y install dialog pv bzip2 psmisc libusb-1.0 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Installing dialog and pv programs if they are not present" --gauge "\nPlease wait...\n" 11 70
+            sudo apt-get --show-progress -y install dialog git pv bzip2 psmisc libusb-1.0 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Installing dialog and pv programs if they are not present" --gauge "\nPlease wait...\n" 11 70
+
+# clone the retropie git and start the installation
+
+            cd
+            git clone git://github.com/petrockblog/RetroPie-Setup.git
+            cd /home/osmc/RetroPie-Setup
+            sudo ./retropie_setup.sh
 
 # download the retrosmc scripts and files
 
