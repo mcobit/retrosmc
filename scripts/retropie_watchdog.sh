@@ -4,12 +4,6 @@
 
 . /home/osmc/RetroPie/scripts/retrosmc-config.cfg
 
-# play the transition video if requested in config file
-
-#if [ "$TRANSITIONVID" = 1 ]; then
-#/home/osmc/RetroPie/scripts/video.sh in &
-#fi
-
 # ugly fix for people having trouble with CEC
 
 if [ "$CECFIX" = 1 ]; then
@@ -47,14 +41,6 @@ while [ true ]; do
 
 		if [ ! "$VAR1" ]; then
 			sudo openvt -c 7 -s -f clear
-
-# play the transition video if requested in config file and restart kodi
-
-#                        if [ "$TRANSITIONVID" = 1 ]; then
-#                           /home/osmc/RetroPie/scripts/video.sh out &
-#                           sleep 4
-#                        fi
-			sudo su -c "sudo systemctl restart mediacenter &" &
 
 # exit script
 
