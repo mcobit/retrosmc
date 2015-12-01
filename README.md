@@ -19,8 +19,6 @@ First things first: I am NOT responsible if this does any harm to your system!
 
     You should have at least 2 GB of free space on your sdcard.
 
-    Please be sure to uninstall any older versions of retrosmc. Save your ROMS and BIOS files before doing so! 
-
     Please report bugs and don't expect everything to work.
 
     This is now a full RetroPie installation, all scripts and files should be present
@@ -47,6 +45,9 @@ Then run it:
 You will see a pretty selfexplanatory menu.
 
 Choose what you want to do and wait for a while.
+
+If you are installing Retrosmc, please choose "Binary Installation" when the RetroPie-Setup menu pops up.
+When the Binaries Installation finished, choose cancel!
 
 You can exit the menu by choosing Cancel at the bottom after every task.
 
