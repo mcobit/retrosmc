@@ -6,9 +6,9 @@
 
 # play the transition video if requested in config file
 
-if [ "$TRANSITIONVID" = 1 ]; then
-/home/osmc/RetroPie/scripts/video.sh in &
-fi
+#if [ "$TRANSITIONVID" = 1 ]; then
+#/home/osmc/RetroPie/scripts/video.sh in &
+#fi
 
 # ugly fix for people having trouble with CEC
 
@@ -50,10 +50,10 @@ while [ true ]; do
 
 # play the transition video if requested in config file and restart kodi
 
-                        if [ "$TRANSITIONVID" = 1 ]; then
-                           /home/osmc/RetroPie/scripts/video.sh out &
-                           sleep 4
-                        fi
+#                        if [ "$TRANSITIONVID" = 1 ]; then
+#                           /home/osmc/RetroPie/scripts/video.sh out &
+#                           sleep 4
+#                        fi
 			sudo su -c "sudo systemctl restart mediacenter &" &
 
 # exit script

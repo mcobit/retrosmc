@@ -29,7 +29,7 @@ if [[ -n "$(pidof X)" ]]; then
 fi
 $es_bin "$@"' > "/usr/bin/emulationstation"
 
-# start chroot.sh script on virtual terminal 7 and detach it
+# start emulationstation on vitrual terminal 7 and detach it
 
 sudo su osmc -c "nohup openvt -c 7 -f -s emulationstation >/dev/null 2>&1 &" &
 
