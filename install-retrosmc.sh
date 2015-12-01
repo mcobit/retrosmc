@@ -45,14 +45,10 @@ do
 
 # download the retrosmc scripts and files
 
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie.sh http://collaborate.osmc.tv/index.php/s/wQFzG95ZK9rxUdP/download
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie_watchdog.sh http://collaborate.osmc.tv/index.php/s/rkWCRvikjPQUlGE/download
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/video.sh http://collaborate.osmc.tv/index.php/s/vLxapLqD9i7HBpr/download
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/kodi_es.mp4 http://collaborate.osmc.tv/index.php/s/npHU07Xuuo47L9Q/download
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/es_kodi.mp4 http://collaborate.osmc.tv/index.php/s/wpDPrnWlxcgaAbe/download
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie.sh https://raw.githubusercontent.com/mcobit/retrosmc/direct/scripts/retropie.sh
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie_watchdog.sh https://raw.githubusercontent.com/mcobit/retrosmc/direct/scripts/retropie_watchdog.sh
             chmod +x /home/osmc/RetroPie/scripts/retropie.sh
             chmod +x /home/osmc/RetroPie/scripts/retropie_watchdog.sh
-            chmod +x /home/osmc/RetroPie/scripts/video.sh
 
 # check for the right configuration and existance of the es_input file to ensure joystick autoconfig to work (important on update)
 
@@ -116,16 +112,11 @@ fi
 
 # download new versions of all scripts and make them executable
 
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie.sh.1 http://collaborate.osmc.tv/index.php/s/wQFzG95ZK9rxUdP/download
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie_watchdog.sh.1 http://collaborate.osmc.tv/index.php/s/rkWCRvikjPQUlGE/download
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/video.sh.1 http://collaborate.osmc.tv/index.php/s/vLxapLqD9i7HBpr/download
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/kodi_es.mp4.1 http://collaborate.osmc.tv/index.php/s/npHU07Xuuo47L9Q/download
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/es_kodi.mp4.1 http://collaborate.osmc.tv/index.php/s/wpDPrnWlxcgaAbe/download
-            wget --no-check-certificate -w 4 -O /home/osmc/install-retrosmc.sh.1 http://collaborate.osmc.tv/index.php/s/pUnX187z29OGN9H/download
-            chmod +x /home/osmc/RetroPie/scripts/chroot.sh.1
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie.sh.1 https://raw.githubusercontent.com/mcobit/retrosmc/direct/scripts/retropie.sh
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie_watchdog.sh.1 https://raw.githubusercontent.com/mcobit/retrosmc/direct/scripts/retropie_watchdog.sh
+            wget --no-check-certificate -w 4 -O /home/osmc/install-retrosmc.sh.1 https://raw.githubusercontent.com/mcobit/retrosmc/direct/install-retrosmc.sh
             chmod +x /home/osmc/RetroPie/scripts/retropie.sh.1
             chmod +x /home/osmc/RetroPie/scripts/retropie_watchdog.sh.1
-            chmod +x /home/osmc/RetroPie/scripts/video.sh.1
             chmod +x /home/osmc/install-retrosmc.sh.1
 
 # replace old with new scripts
@@ -133,9 +124,6 @@ fi
             mv /home/osmc/install-retrosmc.sh.1 /home/osmc/install-retrosmc.sh
             mv /home/osmc/RetroPie/scripts/retropie.sh.1 /home/osmc/RetroPie/scripts/retropie.sh
             mv /home/osmc/RetroPie/scripts/retropie_watchdog.sh.1 /home/osmc/RetroPie/scripts/retropie_watchdog.sh
-            mv /home/osmc/RetroPie/scripts/video.sh.1 /home/osmc/RetroPie/scripts/video.sh
-            mv /home/osmc/RetroPie/scripts/kodi_es.mp4.1 /home/osmc/RetroPie/scripts/kodi_es.mp4
-            mv /home/osmc/RetroPie/scripts/es_kodi.mp4.1 /home/osmc/RetroPie/scripts/es_kodi.mp4
 
 # restart script
 
