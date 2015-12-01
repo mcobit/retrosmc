@@ -19,6 +19,7 @@ sudo chown osmc:osmc /usr/bin/emulationstation
 
 echo '#!/bin/bash
 es_bin="/opt/retropie/supplementary/emulationstation/emulationstation"
+export PATH=$PATH:/opt/vc/bin
 if [[ $(id -u) -eq 0 ]]; then
     echo "emulationstation should not be run as root. If you used 'sudo emulationstation' please run without sudo."
     exit 1

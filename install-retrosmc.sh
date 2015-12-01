@@ -49,6 +49,10 @@ if [[ ! $(grep "dtparam=audio=on" "/boot/config.txt") ]]; then
 sudo su -c 'echo -e "dtparam=audio=on" >> "/boot/config.txt"'
 fi
 
+# set the output volume
+
+amixer set PCM 100
+
 # clone the retropie git and start the installation
 
             cd
