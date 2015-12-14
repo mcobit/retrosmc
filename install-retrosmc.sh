@@ -80,7 +80,7 @@ _EOF_
 
 # restart script
 
-            ./install-retrosmc.sh
+            exec /home/osmc/install-retrosmc.sh
             ;;
         2)
 
@@ -99,7 +99,7 @@ _EOF_
 
 # restart script
 
-            ./install-retrosmc.sh
+            exec /home/osmc/install-retrosmc.sh
             ;;
         3)
 
@@ -110,7 +110,7 @@ _EOF_
 
 # restart script
 
-            ./install-retrosmc.sh
+            exec /home/osmc/install-retrosmc.sh
             ;;
         4)
 
@@ -131,7 +131,7 @@ _EOF_
 
 # restart script
 
-            ./install-retrosmc.sh
+            exec /home/osmc/install-retrosmc.sh
             ;;
     esac
 done
