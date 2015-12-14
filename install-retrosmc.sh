@@ -5,11 +5,11 @@
 # Using this is on your own risk.
 # Script by mcobit
 
+# Version 0.007
+
 # import variables from configfile
 
 source "/home/osmc/RetroPie/scripts/retrosmc-config.cfg"
-
-# check for newer version of this script
 
 # setting up the menu
 
