@@ -7,7 +7,7 @@
 # ugly fix for people having trouble with CEC
 
 if [ "$CECFIX" = 1 ]; then
-sudo cec-client -p 1 &
+sudo /usr/osmc/bin/cec-client -p 1 &
 sleep 1
 sudo kill -9 $(pidof cec-client)
 fi
