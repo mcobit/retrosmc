@@ -9,12 +9,11 @@ I got something for the brave who want to test it:
 
 Disclaimer and other useful information. _Read **before** installing_!
 
-    First things first: I am NOT responsible if this does any harm to your system! I suggest only to install this on a system that the old installer wasn't run on already. You should have at least 2 GB of free space on your SD card.
-
-    Please report bugs and don't expect everything to work.
-    This is now a full RetroPie installation, all scripts and files should be present.
-
-    This will only work on a Raspberry Pi 1 or 2! NOT on the Vero.
+> First things first: I am NOT responsible if this does any harm to your system! I suggest only to install this on a system that the old installer wasn't run on already. You should have at least 2 GB of free space on your SD card.
+>
+> Please report bugs and don't expect everything to work. This is now a full RetroPie installation, all scripts and files should be present.
+> 
+> This will only work on a Raspberry Pi 1 or 2! NOT on the Vero.
 
 ## Installation
 
