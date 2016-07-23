@@ -7,6 +7,13 @@
 
 # Version 0.007
 
+# Check if we are root. If so, cancel installation
+
+if [[ $(id -u) -eq 0 ]]; then
+    echo "This script should not be run as root. Please run as user osmc!"
+    exit 1
+fi
+
 # import variables from configfile
 
 source "/home/osmc/RetroPie/scripts/retrosmc-config.cfg"
