@@ -63,7 +63,7 @@ amixer set PCM 100
 # clone the retropie git and start the installation
 
             cd
-            git clone git://github.com/RetroPie/RetroPie-Setup.git
+            git clone https://github.com/RetroPie/RetroPie-Setup.git
             cd /home/osmc/RetroPie-Setup
             sudo ./retropie_setup.sh
 
