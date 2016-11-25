@@ -13,7 +13,7 @@ Disclaimer and other useful information. _Read **before** installing_!
 >
 > Please report bugs and don't expect everything to work. This is now a full RetroPie installation, all scripts and files should be present.
 > 
-> This will only work on a Raspberry Pi 1 or 2! NOT on the Vero.
+> This will only work on a Raspberry Pi 1, 2 or 3! NOT on the Vero.
 
 ## Installation
 
