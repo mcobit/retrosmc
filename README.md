@@ -20,7 +20,7 @@ Disclaimer and other useful information. _Read **before** installing_!
 1. SSH into your OSMC installation. The default account is `osmc` and the password is also `osmc`.
 * Move to the home directory
   `cd /home/osmc` and download the installation script
-  `wget https://raw.githubusercontent.com/mcobit/retrosmc/direct/install-retrosmc.sh
+  `wget https://raw.githubusercontent.com/mcobit/retrosmc/master/install-retrosmc.sh
 `.
 * Make the script executable `chmod +x install-retrosmc.sh`.
 * Run the script `./install-retrosmc.sh`.
