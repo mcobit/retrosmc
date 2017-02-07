@@ -119,7 +119,7 @@ _EOF_
 
 # delete the addon from kodi addon directory
 
-	   rm -r /home/osmc/.kodi/addons/plugin.program.retropie-launcher
+	   rm -r /home/osmc/.kodi/addons/plugin.program.retrosmc-launcher
 	   dialog --backtitle "RetroPie-OSMC setup script" --title "Removing Addon" --msgbox "\nAddon removed.\n" 11 70
 
 # restart script
