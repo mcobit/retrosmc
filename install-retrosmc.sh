@@ -5,7 +5,7 @@
 # Using this is on your own risk.
 # Script by mcobit
 
-# Version 0.007
+# Version 0.008
 
 # Check if we are root. If so, cancel installation
 
@@ -17,6 +17,13 @@ fi
 # import variables from configfile
 
 source "/home/osmc/RetroPie/scripts/retrosmc-config.cfg"
+
+# Shut down KODI if it is running
+
+if [[ $(pgrep kodi) ]]; then
+  echo "Detected a running instance of KODI. Shutting it down to free memory for installation"
+  sudo systemctl stop mediacenter
+fi
 
 # setting up the menu
 
@@ -93,16 +100,16 @@ _EOF_
 
 # get the addon archive file from github
 
-	  wget --no-check-certificate -w 4 -O plugin.program.retropie-launcher-0.0.1.tgz https://github.com/mcobit/retrosmc/raw/master/plugin.program.retropie-launcher-0.0.1.tgz 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading Addon" --gauge "\nPlease wait...\n"  11 70
+	  wget --no-check-certificate -w 4 -O plugin.program.retrosmc-launcher-0.0.2.tgz https://github.com/mcobit/retrosmc/raw/master/plugin.program.retrosmc-launcher-0.0.2.tgz 2>&1 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" | dialog --title "Downloading Addon" --gauge "\nPlease wait...\n"  11 70
 
 # extract the addon to the kodi addon directory
 
-	  (pv -n plugin.program.retropie-launcher-0.0.1.tgz | sudo tar xzf - -C /home/osmc/ ) 2>&1 | dialog --title "Extracting Addon" --gauge "\nPlease wait...\n" 11 70
+	  (pv -n plugin.program.retrosmc-launcher-0.0.2.tgz | sudo tar xzf - -C /home/osmc/.kodi/addons/ ) 2>&1 | dialog --title "Extracting Addon" --gauge "\nPlease wait...\n" 11 70
 	  dialog --backtitle "RetroPie-OSMC setup script" --title "Installing Addon" --msgbox "\nAddon installed.\n" 11 70
 
 # remove archive file
 
-          rm plugin.program.retropie-launcher-0.0.1.tgz
+          rm plugin.program.retrosmc-launcher-0.0.2.tgz
 
 # restart script
 
@@ -142,3 +149,5 @@ _EOF_
             ;;
     esac
 done
+
+sudo systemctl restart mediacenter
