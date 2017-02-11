@@ -43,6 +43,8 @@ do
 # create the config directory and file
 
             mkdir -p /home/osmc/RetroPie/scripts
+            mkdir -p /home/osmc/RetroPie/scripts/init.d
+            mkdir -p /home/osmc/RetroPie/scripts/exit.d
             touch "/home/osmc/RetroPie/scripts/retrosmc-config.cfg"
 
 # install some programs needed to run the installation and retrosmc
