@@ -42,6 +42,14 @@ while [ true ]; do
 		if [ ! "$VAR1" ]; then
 			sudo openvt -c 7 -s -f clear
 
+# exit scripts                                      
+        if [ -d /home/osmc/RetroPie/scripts/exit.d/ ]; then
+                for script in /home/osmc/RetroPie/scripts/exit.d/*.sh; do               
+                        [ -r "$script" ] && . "$script"                                 
+                done                                                                    
+                unset script                                                            
+        fi
+
 # restart kodi
 
 	sudo su -c "sudo systemctl restart mediacenter &" &

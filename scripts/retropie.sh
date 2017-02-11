@@ -5,6 +5,14 @@
 # emulationstation itself while stopping KODI afterwards.
 # Script by mcobit
 
+# init scripts
+if [[ -d /home/osmc/RetroPie/scripts/init.d/ ]]; then         
+        for script in /home/osmc/RetroPie/scripts/init.d/*.sh; do
+                [[ -r "$script" ]] && . "$script"        
+        done      
+        unset script                
+fi
+
 #clear the virtaul terminal 7 screen
 
 sudo openvt -c 7 -s -f clear
