@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <category label="RetrOSMC Settings">
+        <setting label="Run RetrOSMC Install script" type="action" action="System.Exec(/home/osmc/RetroPie/scripts/start-install.sh)"/>
+        <setting label="Run RetroPie-Setup script" type="action" action="System.Exec(/home/osmc/RetroPie/scripts/start-setup.sh)"/>
+        <setting type="sep"/>
+        <setting label="Run Script before starting Emulationstation" type="bool" id="es_pre" default="false"/>
+        <setting label="Prescript" type="executable" id="prescript" enable="eq(-1,True)" default=""/>
+        <setting label="Run script after Emulationstation quits" type="bool" id="es_post" default="false"/>
+        <setting label="Postscript" type="executable" id="postscript" enable="eq(-1,True)" default=""/>
+    </category>
+</settings>

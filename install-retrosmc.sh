@@ -5,12 +5,37 @@
 # Using this is on your own risk.
 # Script by mcobit
 
-# Version 0.008
+# Version 0.009
+
+function start_joy2key1 {
+        JOY2KEY_DEV="/dev/input/jsX"
+        # call joy2key.py: arguments are curses capability names or hex values starting with '0x'
+        # see: http://pubs.opengroup.org/onlinepubs/7908799/xcurses/terminfo.html
+        python /home/osmc/RetroPie/scripts/joy2key.py /dev/input/jsX kcub1 kcuf1 kcuu1 kcud1 0x0a 0x09 &
+        JOY2KEY1_PID=$!
+}
+
+function stop_joy2key1 {
+    if [[ -n "$JOY2KEY1_PID" ]]; then
+        kill -INT "$JOY2KEY1_PID"
+    fi
+}
+
+# Check if in home directory, quit with a warning, if not.
+
+if [[ "$PWD" != "/home/osmc" ]] || [[ ! -e "/home/osmc/install-retrosmc.sh" ]]; then
+    echo "This script needs to be run from the /home/osmc directory!"
+    sleep 1
+    exit 1
+fi
+
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin:/usr/osmc/bin:/opt/vc/bin
 
 # Check if we are root. If so, cancel installation
 
 if [[ $(id -u) -eq 0 ]]; then
     echo "This script should not be run as root. Please run as user osmc!"
+    sleep 1
     exit 1
 fi
 
@@ -20,12 +45,13 @@ source "/home/osmc/RetroPie/scripts/retrosmc-config.cfg"
 
 # Shut down KODI if it is running
 
-if [[ $(pgrep kodi) ]]; then
+if [[ $(pgrep kodi.bin) ]]; then
   echo "Detected a running instance of KODI. Shutting it down to free memory for installation"
   sudo systemctl stop mediacenter
 fi
 
 # setting up the menu
+start_joy2key1
 
 cmd=(dialog --backtitle "retrosmc installation - Version $CURRENT_VERSION" --menu "Welcome to the retrosmc installation.\nWhat would you like to do?\n " 14 50 16)
 
@@ -67,8 +93,9 @@ fi
 
 amixer set PCM 100
 
-# clone the retropie git and start the installation
+stop_joy2key1
 
+# clone the retropie git and start the installation
             cd
             git clone https://github.com/RetroPie/RetroPie-Setup.git
             cd /home/osmc/RetroPie-Setup
@@ -88,9 +115,13 @@ amixer set PCM 100
 _EOF_
             fi
 
+start_joy2key1
+
 # end installation
 
             dialog --title "FINISHED!" --msgbox "\nEnjoy your retrosmc installation!\nPress OK to return to the menu.\n" 11 70
+
+stop_joy2key1
 
 # restart script
 
@@ -156,4 +187,6 @@ _EOF_
     esac
 done
 
-sudo systemctl restart mediacenter
+if [[ ! $(pgrep test) ]]; then
+  sudo systemctl restart mediacenter
+fi

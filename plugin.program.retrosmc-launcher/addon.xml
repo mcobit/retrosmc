@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.program.retrosmc-launcher" name="Retrosmc Launcher" version="0.0.2" provider-name="mcobit">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="addon.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <language/>
+        <platform>linux</platform>
+        <disclaimer>For Kodi linux (tested on OSMC final)</disclaimer>
+        <summary lang="en">Launch RetroPie from Kodi.</summary>
+        <description lang="en">Launch RetroPie from Kodi.</description>
+        <website>https://github.com/mcobit/retrosmc/</website>
+        <email>me@me.me</email>
+    </extension>
+</addon>
