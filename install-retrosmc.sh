@@ -69,6 +69,7 @@ do
 # create the config directory and file
 
             mkdir -p /home/osmc/RetroPie/scripts
+            mkdir -p /home/osmc/RetroPie/bin
             touch "/home/osmc/RetroPie/scripts/retrosmc-config.cfg"
 
 # install some programs needed to run the installation and retrosmc
@@ -78,10 +79,12 @@ do
 
 # download the retrosmc scripts and files
 
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie.sh https://raw.githubusercontent.com/mcobit/retrosmc/master/scripts/retropie.sh
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie_watchdog.sh https://raw.githubusercontent.com/mcobit/retrosmc/master/scripts/retropie_watchdog.sh
-            chmod +x /home/osmc/RetroPie/scripts/retropie.sh
-            chmod +x /home/osmc/RetroPie/scripts/retropie_watchdog.sh
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/bin/retrosmc_helper https://github.com/mcobit/retrosmc/raw/testing/bin/retrosmc_helper
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-install.sh https://github.com/mcobit/retrosmc/blob/testing/scripts/start-install.sh 
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-setup.sh https://github.com/mcobit/retrosmc/blob/testing/scripts/start-setup.sh 
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-emulationstation.sh https://github.com/mcobit/retrosmc/blob/testing/scripts/start-emulationstation.sh 
+            chmod +x /home/osmc/RetroPie/scripts/*
+            chmod +x /home/osmc/RetroPie/bin/*
 
 # add fix to config.txt for sound
 
@@ -167,18 +170,22 @@ stop_joy2key1
 
 # download new versions of all scripts and make them executable
 
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie.sh.1 https://raw.githubusercontent.com/mcobit/retrosmc/master/scripts/retropie.sh
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie_watchdog.sh.1 https://raw.githubusercontent.com/mcobit/retrosmc/master/scripts/retropie_watchdog.sh
-            wget --no-check-certificate -w 4 -O /home/osmc/install-retrosmc.sh.1 https://raw.githubusercontent.com/mcobit/retrosmc/master/install-retrosmc.sh
-            chmod +x /home/osmc/RetroPie/scripts/retropie.sh.1
-            chmod +x /home/osmc/RetroPie/scripts/retropie_watchdog.sh.1
+            wget --no-check-certificate -w 4 -O /home/osmc/install-retrosmc.sh.1 https://github.com/mcobit/retrosmc/raw/testing/install-retrosmc.sh
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/bin/retrosmc_helper.1 https://github.com/mcobit/retrosmc/raw/testing/bin/retrosmc_helper
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-install.sh.1 https://github.com/mcobit/retrosmc/blob/testing/scripts/start-install.sh
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-setup.sh.1 https://github.com/mcobit/retrosmc/blob/testing/scripts/start-setup.sh
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-emulationstation.sh.1 https://github.com/mcobit/retrosmc/blob/testing/scripts/start-emulationstation.sh
+            chmod +x /home/osmc/RetroPie/scripts/*
+            chmod +x /home/osmc/RetroPie/bin/*
             chmod +x /home/osmc/install-retrosmc.sh.1
 
 # replace old with new scripts
 
             mv /home/osmc/install-retrosmc.sh.1 /home/osmc/install-retrosmc.sh
-            mv /home/osmc/RetroPie/scripts/retropie.sh.1 /home/osmc/RetroPie/scripts/retropie.sh
-            mv /home/osmc/RetroPie/scripts/retropie_watchdog.sh.1 /home/osmc/RetroPie/scripts/retropie_watchdog.sh
+            mv /home/osmc/RetroPie/scripts/home/osmc/RetroPie/bin/retrosmc_helper.1 /home/osmc/RetroPie/bin/retrosmc_helper
+            mv /home/osmc/RetroPie/scripts/start-install.sh.1 /home/osmc/RetroPie/scripts/start-install.sh
+            mv /home/osmc/RetroPie/scripts/start-setup.sh.1 /home/osmc/RetroPie/scripts/start-setup.sh
+            mv /home/osmc/RetroPie/scripts/start-emulationstation.sh.1 /home/osmc/RetroPie/scripts/start-emulationstation.sh
 
 # restart script
 
