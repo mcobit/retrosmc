@@ -48,7 +48,7 @@ else:
 
 
 cmd="/home/osmc/RetroPie/scripts/start-emulationstation.sh \""+prescript_set+"\" \""+postscript_set+"\" \""+cec_set+"\" \""+hyperion_set+"\""
-dialog.ok("test",cmd)
+#dialog.ok("test",cmd)
 
 if os.path.isdir( "/opt/retropie" ):
   os.popen(cmd)
