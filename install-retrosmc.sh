@@ -23,7 +23,7 @@ function stop_joy2key1 {
 
 # Check if in home directory, quit with a warning, if not.
 
-if [[ ! -e "/home/osmc/install-retrosmc.sh" ]]; then
+if [[ $PWD != "/home/osmc/" ]] || [[ ! -e "/home/osmc/install-retrosmc.sh" ]]; then
     echo "This script needs to be run from the /home/osmc directory!"
     sleep 1
     exit 1
@@ -129,7 +129,7 @@ start_joy2key1
 stop_joy2key1
 
 # restart script
-
+            cd
             exec /home/osmc/install-retrosmc.sh
             ;;
         2)
@@ -150,7 +150,7 @@ stop_joy2key1
           rm plugin.program.retrosmc-launcher-0.0.3.zip
 
 # restart script
-
+            cd
             exec /home/osmc/install-retrosmc.sh
             ;;
         3)
@@ -190,7 +190,7 @@ stop_joy2key1
             mv /home/osmc/RetroPie/scripts/start-emulationstation.sh.1 /home/osmc/RetroPie/scripts/start-emulationstation.sh
 
 # restart script
-
+            cd
             exec /home/osmc/install-retrosmc.sh
             ;;
     esac
