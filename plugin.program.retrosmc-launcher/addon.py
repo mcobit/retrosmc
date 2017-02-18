@@ -22,7 +22,7 @@ __version__ = "0.0.1"
 dialog = xbmcgui.Dialog()
 addon = xbmcaddon.Addon(id='plugin.program.retrosmc-launcher')
 
-if os.path.exists( "/home/osmc/install-retrosmc.sh" ):
+if os.path.isdir( "/opt/retropie" ):
   os.popen("/home/osmc/RetroPie/scripts/start-emulationstation.sh")
 else:
   if dialog.yesno("Warning","RetrOSMC is not installed. Should we start the installation?","Be sure to have a working internet connection and a joypad and/or keyboard connected!",""):
