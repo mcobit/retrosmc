@@ -79,10 +79,11 @@ do
 
 # download the retrosmc scripts and files
 
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/bin/retrosmc_helper https://github.com/mcobit/retrosmc/raw/testing/bin/retrosmc_helper
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-install.sh https://github.com/mcobit/retrosmc/blob/testing/scripts/start-install.sh 
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-setup.sh https://github.com/mcobit/retrosmc/blob/testing/scripts/start-setup.sh 
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-emulationstation.sh https://github.com/mcobit/retrosmc/blob/testing/scripts/start-emulationstation.sh 
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/joy2key.py https://raw.githubusercontent.com/mcobit/retrosmc/testing/scripts/joy2key.py
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/bin/retrosmc_helper https://raw.githubusercontent.com/mcobit/retrosmc/testing/bin/retrosmc_helper
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-install.sh https://raw.githubusercontent.com/mcobit/retrosmc/testing/scripts/start-install.sh
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-setup.sh https://raw.githubusercontent.com/mcobit/retrosmc/testing/scripts/start-setup.sh
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-emulationstation.sh https://raw.githubusercontent.com/mcobit/retrosmc/testing/scripts/start-emulationstation.sh
             chmod +x /home/osmc/RetroPie/scripts/*
             chmod +x /home/osmc/RetroPie/bin/*
 
