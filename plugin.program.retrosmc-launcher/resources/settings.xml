@@ -5,9 +5,9 @@
         <setting label="Run RetroPie-Setup script" type="action" action="System.Exec(/home/osmc/RetroPie/scripts/start-setup.sh)"/>
         <setting type="sep"/>
         <setting label="Run Script before starting Emulationstation" type="bool" id="es_pre" default="false"/>
-        <setting label="Prescript" type="executable" id="prescript" enable="eq(-1,True)" default=""/>
+        <setting label="Prescript" type="executable" id="prescript" enable="eq(-1,True)" default="YourCoolScript.sh"/>
         <setting label="Run script after Emulationstation quits" type="bool" id="es_post" default="false"/>
-        <setting label="Postscript" type="executable" id="postscript" enable="eq(-1,True)" default=""/>
+        <setting label="Postscript" type="executable" id="postscript" enable="eq(-1,True)" default="YourCoolScript.sh"/>
         <setting type="sep"/>
         <setting label="CEC Fix" type="bool" id="cec" default="false"/>
         <setting label="Hyperion Fix" type="bool" id="hyperion" default="false"/>
