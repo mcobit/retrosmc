@@ -23,7 +23,7 @@ function stop_joy2key1 {
 
 # Check if in home directory, quit with a warning, if not.
 
-if [[ "$PWD" != "/home/osmc" ]] || [[ ! -e "/home/osmc/install-retrosmc.sh" ]]; then
+if [[ ! -e "/home/osmc/install-retrosmc.sh" ]]; then
     echo "This script needs to be run from the /home/osmc directory!"
     sleep 1
     exit 1
@@ -52,6 +52,7 @@ fi
 
 # setting up the menu
 start_joy2key1
+cd
 
 cmd=(dialog --backtitle "retrosmc installation - Version $CURRENT_VERSION" --menu "Welcome to the retrosmc installation.\nWhat would you like to do?\n " 14 50 16)
 
