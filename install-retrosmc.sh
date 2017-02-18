@@ -174,9 +174,9 @@ stop_joy2key1
 
             wget --no-check-certificate -w 4 -O /home/osmc/install-retrosmc.sh.1 https://github.com/mcobit/retrosmc/raw/testing/install-retrosmc.sh
             wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/bin/retrosmc_helper.1 https://github.com/mcobit/retrosmc/raw/testing/bin/retrosmc_helper
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-install.sh.1 https://github.com/mcobit/retrosmc/blob/testing/scripts/start-install.sh
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-setup.sh.1 https://github.com/mcobit/retrosmc/blob/testing/scripts/start-setup.sh
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-emulationstation.sh.1 https://github.com/mcobit/retrosmc/blob/testing/scripts/start-emulationstation.sh
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-install.sh.1 https://github.com/mcobit/retrosmc/raw/testing/scripts/start-install.sh
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-setup.sh.1 https://github.com/mcobit/retrosmc/raw/testing/scripts/start-setup.sh
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/start-emulationstation.sh.1 https://github.com/mcobit/retrosmc/raw/testing/scripts/start-emulationstation.sh
             chmod +x /home/osmc/RetroPie/scripts/*
             chmod +x /home/osmc/RetroPie/bin/*
             chmod +x /home/osmc/install-retrosmc.sh.1
