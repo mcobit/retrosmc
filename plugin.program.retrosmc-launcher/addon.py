@@ -46,8 +46,9 @@ if hyperion_set == "false":
 else:
   hyperion_set = "hyperion"
 
-  cmd="/home/osmc/RetroPie/scripts/start-emulationstation.sh '"+prescript_set+"' '"+postscript_set+"' '"+cec_set+"' '"+hyperion_set+"'"
-#  dialog.ok("test",cmd)
+
+cmd="/home/osmc/RetroPie/scripts/start-emulationstation.sh \""+prescript_set+"\" \""+postscript_set+"\" \""+cec_set+"\" \""+hyperion_set+"\""
+dialog.ok("test",cmd)
 
 if os.path.isdir( "/opt/retropie" ):
   os.popen(cmd)
