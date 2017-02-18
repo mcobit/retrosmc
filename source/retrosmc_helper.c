@@ -13,7 +13,7 @@ system("clear");
     printf("# Starting RetrOSMC Install script... #\n");
     printf("#######################################\n");
     sleep(2);
-    system("PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin:/usr/osmc/bin:/opt/vc/bin openvt -c 7 -f -s -w /home/osmc/install-retrosmc.sh");
+    system("cd && PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin:/usr/osmc/bin:/opt/vc/bin openvt -c 7 -f -s -w /home/osmc/install-retrosmc.sh");
  }
 
   if ( 0 == strcmp("setup", argv[1]) ) {
@@ -21,7 +21,7 @@ system("clear");
     printf("# Starting RetroPie Setup script... #\n");
     printf("#####################################\n");
     sleep(2);
-    system("PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin:/usr/osmc/bin:/opt/vc/bin openvt -c 7 -f -s -w sudo /home/osmc/RetroPie-Setup/retropie_setup.sh");
+    system("cd && PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin:/usr/osmc/bin:/opt/vc/bin openvt -c 7 -f -s -w sudo /home/osmc/RetroPie-Setup/retropie_setup.sh");
   }
 
   if ( 0 == strcmp("es", argv[1]) ) {
@@ -29,7 +29,7 @@ system("clear");
     printf("# Starting Emulationstation... #\n");
     printf("################################\n");
     sleep(2);
-    system("PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin:/usr/osmc/bin:/opt/vc/bin openvt -c 7 -f -s -w emulationstation");
+    system("cd && PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin:/usr/osmc/bin:/opt/vc/bin openvt -c 7 -f -s -w emulationstation");
   }
 
     system("clear");
