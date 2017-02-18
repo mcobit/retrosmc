@@ -23,7 +23,7 @@ function stop_joy2key1 {
 
 # Check if in home directory, quit with a warning, if not.
 
-if [[ $PWD != "/home/osmc/" ]] || [[ ! -e "/home/osmc/install-retrosmc.sh" ]]; then
+if [[ $PWD != "/home/osmc" ]] || [[ ! -e "/home/osmc/install-retrosmc.sh" ]]; then
     echo "This script needs to be run from the /home/osmc directory!"
     sleep 1
     exit 1
