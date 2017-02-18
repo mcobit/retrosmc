@@ -8,5 +8,8 @@
         <setting label="Prescript" type="executable" id="prescript" enable="eq(-1,True)" default=""/>
         <setting label="Run script after Emulationstation quits" type="bool" id="es_post" default="false"/>
         <setting label="Postscript" type="executable" id="postscript" enable="eq(-1,True)" default=""/>
+        <setting type="sep"/>
+        <setting label="CEC Fix" type="bool" id="cec" default="false"/>
+        <setting label="Hyperion Fix" type="bool" id="hyperion" default="false"/>
     </category>
 </settings>

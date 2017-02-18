@@ -29,7 +29,7 @@ fi
 tput cnorm
 _EOF_
 
-  sudo su osmc -c "/home/osmc/RetroPie/bin/retrosmc_helper es &" &Âdisown
+  sudo su osmc -c "/home/osmc/RetroPie/bin/retrosmc_helper es $1 $2 $3 $4 &" &Âdisown
 
   sleep 0.5
 

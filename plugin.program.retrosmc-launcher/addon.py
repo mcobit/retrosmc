@@ -18,12 +18,39 @@ __url__ = "http://blog.petrockblock.com/retropie/"
 __git_url__ = "https://github.com/mcobit/retrosmc/"
 __credits__ = "mcobit"
 __version__ = "0.0.1"
+__settings__ = xbmcaddon.Addon(id="plugin.program.retrosmc-launcher")
 
 dialog = xbmcgui.Dialog()
 addon = xbmcaddon.Addon(id='plugin.program.retrosmc-launcher')
 
+es_pre_set = __settings__.getSetting("es_pre")
+es_post_set = __settings__.getSetting("es_post")
+prescript_set = __settings__.getSetting("prescript")
+postscript_set = __settings__.getSetting("postscript")
+cec_set = __settings__.getSetting("cec")
+hyperion_set = __settings__.getSetting("hyperion")
+
+if es_pre_set == "false":
+  prescript_set = "none"
+
+if es_post_set == "false":
+  postscript_set = "none"
+
+if cec_set == "false":
+  cec_set = "none"
+else:
+  cec_set = "cec"
+
+if hyperion_set == "false":
+  hyperion_set = "none"
+else:
+  hyperion_set = "hyperion"
+
+  cmd="/home/osmc/RetroPie/scripts/start-emulationstation.sh "+prescript_set+" "+postscript_set+" "+cec_set+" "+hyperion_set
+  dialog.ok("test",cmd)
+
 if os.path.isdir( "/opt/retropie" ):
-  os.popen("/home/osmc/RetroPie/scripts/start-emulationstation.sh")
+  os.popen(cmd)
 else:
   if dialog.yesno("Warning","RetrOSMC is not installed. Should we start the installation?","Be sure to have a working internet connection and a joypad and/or keyboard connected!",""):
     os.popen("cd && wget https://raw.githubusercontent.com/mcobit/retrosmc/testing/install-retrosmc.sh")
