@@ -28,7 +28,7 @@ Disclaimer and other useful information. _Read **before** installing_!
 You will see a pretty self-explanatory menu.
 Choose what you want to do and wait for a while.
 
-If you are installing Retrosmc, please choose "Binary Installation" when the RetroPie-Setup menu pops up.
+If you are installing Retrosmc, please choose "Basic Installation" when the RetroPie-Setup menu pops up.
 When the Binaries Installation finished, choose "cancel" to return to the Retrosmc menu.
 
 You can exit the menu by choosing "cancel" at the bottom after every task.
