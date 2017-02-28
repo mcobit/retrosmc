@@ -1,0 +1,11 @@
+[Unit]
+Conflicts = mediacenter.service
+
+[Service]
+PermissionsStartOnly = yes
+ExecStart = /opt/retropie/supplementary/emulationstation/emulationstation
+ExecStopPost = /bin/systemctl start mediacenter.service
+StandardInput = tty
+StandardOutput = tty
+TTYPath = /dev/tty1
+User = osmc

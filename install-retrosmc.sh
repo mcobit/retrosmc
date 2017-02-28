@@ -53,9 +53,9 @@ do
 # download the retrosmc scripts and files
 
             wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie.sh https://raw.githubusercontent.com/mcobit/retrosmc/master/scripts/retropie.sh
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie_watchdog.sh https://raw.githubusercontent.com/mcobit/retrosmc/master/scripts/retropie_watchdog.sh
+            wget --no-check-certificate -w 4 -O /etc/systemd/system/retropie.service https://raw.githubusercontent.com/mcobit/retrosmc/master/scripts/retropie.service
             chmod +x /home/osmc/RetroPie/scripts/retropie.sh
-            chmod +x /home/osmc/RetroPie/scripts/retropie_watchdog.sh
+            systemctl daemon-reload
 
 # add fix to config.txt for sound
 
@@ -137,17 +137,18 @@ _EOF_
 # download new versions of all scripts and make them executable
 
             wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie.sh.1 https://raw.githubusercontent.com/mcobit/retrosmc/master/scripts/retropie.sh
-            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie_watchdog.sh.1 https://raw.githubusercontent.com/mcobit/retrosmc/master/scripts/retropie_watchdog.sh
+            wget --no-check-certificate -w 4 -O /home/osmc/RetroPie/scripts/retropie.service.1 https://raw.githubusercontent.com/mcobit/retrosmc/master/scripts/retropie.service
             wget --no-check-certificate -w 4 -O /home/osmc/install-retrosmc.sh.1 https://raw.githubusercontent.com/mcobit/retrosmc/master/install-retrosmc.sh
             chmod +x /home/osmc/RetroPie/scripts/retropie.sh.1
-            chmod +x /home/osmc/RetroPie/scripts/retropie_watchdog.sh.1
             chmod +x /home/osmc/install-retrosmc.sh.1
 
 # replace old with new scripts
 
             mv /home/osmc/install-retrosmc.sh.1 /home/osmc/install-retrosmc.sh
             mv /home/osmc/RetroPie/scripts/retropie.sh.1 /home/osmc/RetroPie/scripts/retropie.sh
-            mv /home/osmc/RetroPie/scripts/retropie_watchdog.sh.1 /home/osmc/RetroPie/scripts/retropie_watchdog.sh
+            mv /home/osmc/RetroPie/scripts/retropie.service.1 /etc/systemd/system/retropie.service
+            systemctl daemon-reload
+            rm /home/osmc/RetroPie/scripts/retropie_watchdog.sh
 
 # restart script
 
