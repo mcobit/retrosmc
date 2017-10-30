@@ -43,6 +43,19 @@ The link should contain the following command:
 
 Have fun!
 
+## Uninstallation
+
+```
+sudo rm -R /home/osmc/RetroPie
+sudo rm -R /home/osmc/RetroPie-Setup
+sudo rm -R /opt/retropie
+sudo rm -R /home/osmc/.emulationstation
+sudo rm -R /usr/bin/emulationstation
+sudo rm -R /etc/emulationstation
+
+sudo apt-get remove -y libsdl1.2-dev screen scons libasound2-dev pkg-config libgtk2.0-dev libboost-filesystem-dev libboost-system-dev zip python-imaging libfreeimage-dev libfreetype6-dev libxml2 libxml2-dev libbz2-dev libaudiofile-dev libsdl-sound1.2-dev libsdl-mixer1.2-dev joystick fbi gcc-4.7 automake1.4 libcurl4-openssl-dev libzip-dev build-essential nasm libgl1-mesa-dev libglu1-mesa-dev libsdl1.2-dev libvorbis-dev libpng12-dev libvpx-dev freepats subversion libboost-serialization-dev libboost-thread-dev libsdl-ttf2.0-dev cmake
+```
+
 ## Credits
 
 * RetroPie (Took the `rootfs` from the RetroPie project - You folks rock!)
