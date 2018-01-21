@@ -93,7 +93,11 @@ _EOF_
             if [ ! -f /usr/lib/arm-linux-gnueabihf/libboost_date_time.so.1.55.0 ]; then
                 mkdir /home/osmc/tmp
                 cd /home/osmc/tmp
-                wget http://ftp.us.debian.org/debian/pool/main/i/icu/libicu52_52.1-8+deb8u6_armhf.deb http://ftp.us.debian.org/debian/pool/main/b/boost1.55/libboost-thread1.55.0_1.55.0+dfsg-3_armhf.deb http://ftp.us.debian.org/debian/pool/main/b/boost1.55/libboost-chrono1.55.0_1.55.0+dfsg-3_armhf.deb http://ftp.us.debian.org/debian/pool/main/b/boost1.55/libboost-locale1.55.0_1.55.0+dfsg-3_armhf.deb http://ftp.us.debian.org/debian/pool/main/b/boost1.55/libboost-system1.55.0_1.55.0+dfsg-3_armhf.deb
+                wget "http://ftp.us.debian.org/debian/pool/main/i/icu/libicu52_52.1-8+deb8u6_armhf.deb"\
+                "http://ftp.us.debian.org/debian/pool/main/b/boost1.55/libboost-thread1.55.0_1.55.0+dfsg-3_armhf.deb"\
+                "http://ftp.us.debian.org/debian/pool/main/b/boost1.55/libboost-chrono1.55.0_1.55.0+dfsg-3_armhf.deb"\
+                "http://ftp.us.debian.org/debian/pool/main/b/boost1.55/libboost-locale1.55.0_1.55.0+dfsg-3_armhf.deb"\
+                "http://ftp.us.debian.org/debian/pool/main/b/boost1.55/libboost-system1.55.0_1.55.0+dfsg-3_armhf.deb"
                 sudo dpkg -i lib*armhf.deb
                 rm -rf /home/osmc/tmp
                 cd /usr/lib/arm-linux-gnueabihf
