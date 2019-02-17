@@ -18,6 +18,7 @@ sudo su osmc -c "sh /home/osmc/RetroPie/scripts/retropie_watchdog.sh &" &
 sudo chown osmc:osmc /usr/bin/emulationstation
 
 echo '#!/bin/bash
+cd /home/osmc
 es_bin="/opt/retropie/supplementary/emulationstation/emulationstation"
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin:/usr/osmc/bin:/opt/vc/bin
 
